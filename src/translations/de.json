@@ -1,0 +1,34 @@
+{
+    "translation": {
+        "about": {
+            "header": "Jonas König",
+            "greeting": "Hi {{name}}!",
+            "greetingNoName": "Hallo zusammen!",
+            "greetingText": "Ich bin Jonas und diese Seite ist eine Art digitale Visitenkarte. Das Schachspiel bringt die Seite zum Leben. Die Positionen der Schachfiguren werden in die URL geschrieben. Das bedeutet du kannst einen Zug machen und den Link an eine*n Freund*in schicken.",
+            "tab": "Über mich",
+            "exp": "Erfahrung",
+            "expText": "Ich habe berufliche Erfahrung im Umgang mit TypeScript, React und vielen begleitenden Frontend Technologien. Während meines Studiums habe ich weit-verbreitete Programmiersprachen wie Java und Python gelernt. Aber, ich hatte auch Gelegenheit durch außergewöhnliche Technologien, wie Haskell, neue Perspektiven zu sehen.",
+            "cv": "Lebenslauf",
+            "cs": "Informatik",
+            "bufdi": "BufDi",
+            "today": "heute"
+        },
+        "game": {
+            "header": "Schach",
+            "tab": "Spielen",
+            "player1": "Spieler Schwarz",
+            "player2": "Spieler Weiß"
+        },
+        "settings": {
+            "header": "Einstellungen",
+            "tab": "Einstellungen",
+            "appearance": "Erscheinung",
+            "lang": "Sprachauswahl",
+            "gameText": "Der Zustand des Schachbretts wird in der URL gespeichert. Daher kannst du dein Brett mit Freund*innen teilen und sie sehen genau das, was du siehst.",
+            "gameReset": "Brett zurücksetzen",
+            "namesText": "Wenn ihr mögt könnt ihr eure Namen eintragen, um sie am Schachbrett anzuzeigen.",
+            "queensText": "Die Partie zieht sich schon eine Weile? Ihr könntet zufällig mehr Damen hinzufügen.",
+            "addQueens": "Mehr Damen hinzufügen (experimentell)"
+        }
+    }
+}
