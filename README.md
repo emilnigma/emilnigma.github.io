@@ -1,2 +1,1 @@
-# emilnigma.github.io
-Blog of Enigma
+# Blog of Enigma
