@@ -16,11 +16,11 @@ Enigma: Maybe this will help: https://what3words.com/. After you find him contin
 
 const Paint = (): ReactElement => {
     const [chat, setChat] = useState(["Enigma: Did you figure out your person of interest?"]);
+    const [solved, setSolved] = useState("none");
     const [chemist, setChemist] = useState("");
     const [word1, setWord1] = useState("");
     const [word2, setWord2] = useState("");
     const [word3, setWord3] = useState("");
-    const [solved, setSolved] = useState("none");
     
     const onClick = () => {
         if (solved === "none") {
@@ -46,7 +46,7 @@ const Paint = (): ReactElement => {
                 ])
                 setSolved("all");
             } else {
-                setChat([...chat, `${word1}, ${word2} and ${word3}?`, "No, I don't think that's it."])
+                setChat([...chat, `You: ${word1}, ${word2} and ${word3}?`, "Enigma: No, I don't think that's it."])
             }
         }
     }

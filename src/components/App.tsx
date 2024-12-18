@@ -6,6 +6,8 @@ import { Header } from './Nav';
 import { useUrlState } from '../core/State';
 import Panel from './Panel';
 import Paint from './pnt';
+import Safe from './sfe';
+import Flight from './flt';
 
 const App = observer(() => {
     // const { feature } = useApp();
@@ -31,11 +33,7 @@ const App = observer(() => {
             content: <Box className="content"><Paint /></Box>
         },
         sfe: {
-            /*
-Safe code 
-Sum is 1678
-*/
-            content: <Box className="content">safe</Box>
+            content: <Box className="content"><Safe /></Box>
         },
         frg: {
             content: (
@@ -47,13 +45,7 @@ Sum is 1678
             )
         },
         flt: {
-            content: (
-                <Box className="content">
-                    <Header label="Kapitel 3:" variant="h5" />
-                    <Header label="Der fehlgeschlagene Flug" variant="h3" />
-                    <Paint />
-                </Box>
-            )
+            content: <Box className="content"><Flight /></Box>
         },
         doc: {
             content: (
