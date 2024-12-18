@@ -1,9 +1,7 @@
 import { IconButton, Stack, TextField, Typography } from "@mui/material"
 import Panel from "../Panel"
-import { ChangeEventHandler, ReactElement, useState } from "react"
+import { ReactElement, useState } from "react"
 import { Header } from "../Nav"
-import { usePersistentState } from "../../core/State"
-import validate from "../../core/Validate"
 import { Send } from "@mui/icons-material"
 
 /*
