@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react'
 // import { useTranslation } from 'react-i18next';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import { Header } from './Nav';
 import { useUrlState } from '../core/State';
 import Panel from './Panel';
-import Paint from './paint';
+import Paint from './pnt';
 
 const App = observer(() => {
     // const { feature } = useApp();
@@ -17,22 +17,25 @@ const App = observer(() => {
                 <Box className="content">
                     <Header label="Oops" />
                     <Panel>
-                        You seem to be lost Scan the QR code again to arrive at the correct page.
+                        <Typography>
+                            You seem to be lost Scan the QR code again to arrive at the correct page.
                         <br />
                         <br />
                         Du hast dich anscheinend verirrt. Scanne nochmal den QR code um auf der richtigen Seite zu landen.
+                            </Typography>
                     </Panel>
                 </Box>
             )
         },
         pnt: {
-            content: (
-                <Box className="content">
-                    <Header label="Chapter 1:" variant="h5" />
-                    <Header label="The Counterfeit Colors" variant="h3" />
-                    <Paint />
-                </Box>
-            )
+            content: <Box className="content"><Paint /></Box>
+        },
+        sfe: {
+            /*
+Safe code 
+Sum is 1678
+*/
+            content: <Box className="content">safe</Box>
         },
         frg: {
             content: (

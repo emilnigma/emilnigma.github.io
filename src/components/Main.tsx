@@ -12,8 +12,11 @@ import * as de from '../translations/de.json'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ffeb3b',
+      main: '#1271FF',
       contrastText: '#fff',
+    },
+    success: {
+      main: '#FFF'
     },
     text: {
       primary: '#fff'
