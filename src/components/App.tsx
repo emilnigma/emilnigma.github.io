@@ -8,6 +8,8 @@ import Panel from './Panel';
 import Paint from './pnt';
 import Safe from './sfe';
 import Flight from './flt';
+import Document from './doc';
+import Forgery from './frg';
 
 const App = observer(() => {
     // const { feature } = useApp();
@@ -36,25 +38,13 @@ const App = observer(() => {
             content: <Box className="content"><Safe /></Box>
         },
         frg: {
-            content: (
-                <Box className="content">
-                    <Header label="Kapitel 2:" variant="h5" />
-                    <Header label="Der böswillige Betrüger" variant="h3" />
-                    <Paint />
-                </Box>
-            )
+            content: <Box className="content"><Forgery /></Box>
         },
         flt: {
             content: <Box className="content"><Flight /></Box>
         },
         doc: {
-            content: (
-                <Box className="content">
-                    <Header label="Kapitel 4:" variant="h5" />
-                    <Header label="Der geflohene Gutachter" variant="h3" />
-                    <Paint />
-                </Box>
-            )
+            content: <Box className="content"><Document /></Box>
         },
     };
     const isValidKey = Object.keys(tabs).includes(active)

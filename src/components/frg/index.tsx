@@ -4,7 +4,7 @@ import { ReactElement, useState } from "react"
 import { Header } from "../Nav"
 import { Send } from "@mui/icons-material"
 
-const Paint = (): ReactElement => {
+const Forgery = (): ReactElement => {
     const [chat, setChat] = useState(["Enigma: Did you figure out your person of interest?"]);
     const [solved, setSolved] = useState("none");
     const [chemist, setChemist] = useState("");
@@ -44,7 +44,7 @@ const Paint = (): ReactElement => {
     return (
         <>
         <Header label="Encrypted Chat" variant="h4" />
-        <Header label="The Counterfeit Colors" variant="h6" />
+        <Header label="Der böswillige Betrüger" variant="h6" />
         <Panel>
             {
                 chat.map(m => <Typography sx={{ pb: 2 }}>{m}</Typography>)
@@ -78,4 +78,4 @@ const Paint = (): ReactElement => {
     )
 }
 
-export default Paint;
+export default Forgery;
