@@ -70,15 +70,17 @@ const Paint = (): ReactElement => {
             }
             {
                 solved !== "chemist" ? null : (
+                    <>
+                    <Typography sx={{mt: '15px'}}>You: The three words are</Typography> 
                     <Stack direction="row">
-                        <Typography sx={{mt: '15px'}}>You: The three words are</Typography>
-                        <TextField variant="standard" focused color="success" value={word1} onChange={({target}) => setWord1(target.value)}/>
+                        <TextField variant="standard" focused color="success" value={word1} onChange={({target}) => setWord1(target.value.toLowerCase())}/>
                         <Typography sx={{mt: '15px'}}>,</Typography>
-                        <TextField variant="standard" focused color="success" value={word2} onChange={({target}) => setWord2(target.value)}/>
+                        <TextField variant="standard" focused color="success" value={word2} onChange={({target}) => setWord2(target.value.toLowerCase())}/>
                         <Typography sx={{mt: '15px'}}>{" and "}</Typography>
-                        <TextField variant="standard" focused color="success" value={word3} onChange={({target}) => setWord3(target.value)}/>
+                        <TextField variant="standard" focused color="success" value={word3} onChange={({target}) => setWord3(target.value.toLowerCase())}/>
                         <IconButton color="inherit" onClick={onClick}><Send /></IconButton>
                     </Stack>
+                    </>
                 )
             }
         </Panel>
