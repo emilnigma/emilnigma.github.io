@@ -5,38 +5,54 @@ import { Header } from "../Nav"
 import { Send } from "@mui/icons-material"
 
 const Document = (): ReactElement => {
-    const [chat, setChat] = useState(["Enigma: Did you figure out your person of interest?"]);
+    const [chat, setChat] = useState(["Enigma: Welche Pigmente beweisen eindeutig, dass die Carpaccios Fälschungen sein müssen?"]);
     const [solved, setSolved] = useState("none");
-    const [chemist, setChemist] = useState("");
-    const [word1, setWord1] = useState("");
-    const [word2, setWord2] = useState("");
-    const [word3, setWord3] = useState("");
+    const [carpaccio, setCarpaccio] = useState("");
+    const [bellini, setBellini] = useState("");
+    const [place, setPlace] = useState("");
     
     const onClick = () => {
         if (solved === "none") {
-            const isChemistSolved = chemist === "4"
-            if (isChemistSolved) {
+            const carpLower = carpaccio.toLowerCase();
+            const pig1Solved = carpLower.includes('py35') || carpLower.includes('cadmiumgelb')
+            const pig2Solved = carpLower.includes('pr92') || carpLower.includes('manganviolett')
+            if (pig1Solved && pig2Solved) {
                 setChat([
                     ...chat,
-                    "You: It's suspect #4 Owen Paars.",
-                    "Enigma: Ah Owen! I remember him now. We shared a meal together. I only had a salad but somehow I ended up paying for the entire thing 🤬 That clown treated himself to a whole three course menu. He made fun of the descriptions in the menu the entire time. I'm sure fancy detectives like yourselves can trace back what three words they used … [Continue to page 4 and 5]"
+                    "You: Die Pigmente Cadmiumgelb (PY35) und Manganviolett (PR92) gab es noch nicht.",
+                    "Enigma: Korrekt. Welche Pigmente sind es bei Bellini?"
                 ])
-                setSolved("chemist");
+                setSolved("carpaccio");
             } else {
-                setChat([...chat, `You: We think it was suspect #${chemist}.`, "Enigma: That cannot be true. Try again."])
+                setChat([...chat, `You: ${carpaccio}?`, "Enigma: Da stimmt etwas nicht. Schaut nochmal genau hin."])
             }
         }
-        if (solved === "chemist") {
-            const isMenuSolved = word1 === "crunchy" && word2 === "dark" && word3 === "flamed"
-            if (isMenuSolved) {
+        if (solved === "carpaccio") {
+            const bellLower = bellini.toLowerCase();
+            const pig1Solved = bellLower.includes('pb28') || bellLower.includes('kobaltblau')
+            const pig2Solved = bellLower.includes('pw6') || bellLower.includes('titanweiß')
+            if (pig1Solved && pig2Solved) {
                 setChat([
                     ...chat,
-                    `You: The words were ${word1}, ${word2} and ${word3}. But why are we talking about food now? Shouldn't we try to find this guy?`,
-                    "Enigma: Maybe this will help: what3words.com. After you find him continue to page 6."
+                    "You: Die Pigmente Kobaltblau (PB28) und Titanweiß (PW6) standen Bellini noch nicht zur Verfügung.",
+                    "Enigma: Absolut richtig. Der Gutachter hat offensichtlich versucht etwas zu vertuschen. [Weiter auf Seite 5]"
+                ])
+                setSolved("bellini");
+            } else {
+                setChat([...chat, `You: ${bellini}?`, "Enigma: Da stimmt etwas nicht. Keine Zahlendreher?."])
+            }
+        }
+        if (solved === "bellini") {
+            const isPlaceSolved = place.toLowerCase().includes('bad') && place.toLowerCase().includes('füssing');
+            if (isPlaceSolved) {
+                setChat([
+                    ...chat,
+                    "You: W. Groll ist in Bad Füssing.",
+                    "Enigma: Gute Arbeit. [Weiter auf Seite 6]"
                 ])
                 setSolved("all");
             } else {
-                setChat([...chat, `You: ${word1}, ${word2} and ${word3}?`, "Enigma: No, I don't think that's it."])
+                setChat([...chat, `You: ${place}?`, "Enigma: Ich denke nicht, dass er sich dort aufhält."])
             }
         }
     }
@@ -52,25 +68,28 @@ const Document = (): ReactElement => {
             {
                 solved !== "none" ? null : (
                     <Stack direction="row">
-                        <Typography sx={{mt: '15px'}}>You: We think it was suspect #</Typography>
-                        <TextField variant="standard" focused color="success" value={chemist} onChange={({target}) => setChemist(target.value)}/>
+                        <Typography sx={{mt: '15px'}}>You: Die Pigmente</Typography>
+                        <TextField variant="standard" focused color="success" value={carpaccio} onChange={({target}) => setCarpaccio(target.value)}/>
                         <IconButton color="inherit" onClick={onClick}><Send /></IconButton>
                     </Stack>
                 )
             }
             {
-                solved !== "chemist" ? null : (
-                    <>
-                    <Typography sx={{mt: '15px'}}>You: The three words are</Typography> 
+                solved !== "carpaccio" ? null : (
                     <Stack direction="row">
-                        <TextField variant="standard" focused color="success" value={word1} onChange={({target}) => setWord1(target.value.toLowerCase())}/>
-                        <Typography sx={{mt: '15px'}}>,</Typography>
-                        <TextField variant="standard" focused color="success" value={word2} onChange={({target}) => setWord2(target.value.toLowerCase())}/>
-                        <Typography sx={{mt: '15px'}}>{" and "}</Typography>
-                        <TextField variant="standard" focused color="success" value={word3} onChange={({target}) => setWord3(target.value.toLowerCase())}/>
+                        <Typography sx={{mt: '15px'}}>You: Bei Bellini sind es</Typography>
+                        <TextField variant="standard" focused color="success" value={bellini} onChange={({target}) => setBellini(target.value)}/>
                         <IconButton color="inherit" onClick={onClick}><Send /></IconButton>
                     </Stack>
-                    </>
+                )
+            }
+            {
+                solved !== "bellini" ? null : (
+                    <Stack direction="row">
+                        <Typography sx={{mt: '15px'}}>You: W. Groll ist in</Typography>
+                        <TextField variant="standard" focused color="success" value={place} onChange={({target}) => setPlace(target.value)}/>
+                        <IconButton color="inherit" onClick={onClick}><Send /></IconButton>
+                    </Stack>
                 )
             }
         </Panel>
