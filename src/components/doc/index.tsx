@@ -35,7 +35,7 @@ const Document = (): ReactElement => {
                 setChat([
                     ...chat,
                     "You: Die Pigmente Kobaltblau (PB28) und Titanweiß (PW6) standen Bellini noch nicht zur Verfügung.",
-                    "Enigma: Absolut richtig. Der Gutachter hat offensichtlich versucht etwas zu vertuschen. [Weiter auf Seite 5]"
+                    "Enigma: Absolut richtig. Der Gutachter hat offensichtlich versucht etwas zu vertuschen. [Weiter auf Seite 4]"
                 ])
                 setSolved("bellini");
             } else {
@@ -48,7 +48,7 @@ const Document = (): ReactElement => {
                 setChat([
                     ...chat,
                     "You: W. Groll ist in Bad Füssing.",
-                    "Enigma: Gute Arbeit. [Weiter auf Seite 6]"
+                    "Enigma: Gute Arbeit. [Weiter auf Seite 5]"
                 ])
                 setSolved("all");
             } else {
