@@ -5,38 +5,38 @@ import { Header } from "../Nav"
 import { Send } from "@mui/icons-material"
 
 const Forgery = (): ReactElement => {
-    const [chat, setChat] = useState(["Enigma: Did you figure out your person of interest?"]);
+    const [chat, setChat] = useState(["Enigma: Habt ihr den Ort eingrenzen können?"]);
     const [solved, setSolved] = useState("none");
-    const [chemist, setChemist] = useState("");
-    const [word1, setWord1] = useState("");
-    const [word2, setWord2] = useState("");
-    const [word3, setWord3] = useState("");
+    const [location, setLocation] = useState("");
+    const [name, setName] = useState("");
     
     const onClick = () => {
         if (solved === "none") {
-            const isChemistSolved = chemist === "4"
-            if (isChemistSolved) {
+            const isLocationSolved = location.toLowerCase() === "volciano"
+            if (isLocationSolved) {
                 setChat([
                     ...chat,
-                    "You: It's suspect #4 Owen Paars.",
-                    "Enigma: Ah Owen! I remember him now. We shared a meal together. I only had a salad but somehow I ended up paying for the entire thing 🤬 That clown treated himself to a whole three course menu. He made fun of the descriptions in the menu the entire time. I'm sure fancy detectives like yourselves can trace back what three words they used … [Continue to page 4 and 5]"
+                    "You: Es muss jemand aus Volciano sein.",
+                    "Enigma: Das kann gut sein. Ich kenne dort ein Museum, das ihr euch näher ansehen solltet. [Weiter auf Seite 4]",
+                    "Enigma: Ich denke wir suchen jemanden, der Zeit hatte seine Fähigkeiten richtig zu entwickeln. Aber die Person muss noch mobil sein. Mit anderen Worten es sollte eine Person zwischen 50 und 60 sein. Sagt bescheid, wenn ihr damit weiterkommt."
                 ])
-                setSolved("chemist");
+                setSolved("location");
             } else {
-                setChat([...chat, `You: We think it was suspect #${chemist}.`, "Enigma: That cannot be true. Try again."])
+                setChat([...chat, `You: War es ${location}?`, "Enigma: Das kann nicht sein. Versucht es nochmal."])
             }
         }
-        if (solved === "chemist") {
-            const isMenuSolved = word1 === "crunchy" && word2 === "dark" && word3 === "flamed"
+        if (solved === "location") {
+            const nameToLower = name.toLowerCase();
+            const isMenuSolved = nameToLower.includes('fabio') && nameToLower.includes('giglia')
             if (isMenuSolved) {
                 setChat([
                     ...chat,
-                    `You: The words were ${word1}, ${word2} and ${word3}. But why are we talking about food now? Shouldn't we try to find this guy?`,
-                    "Enigma: Maybe this will help: what3words.com. After you find him continue to page 6."
+                    `You: Es war ein Mann mit dem Namen: Fabio Giglia.`,
+                    "Enigma: Gute Arbeit! Jetzt müssen wir ihn nur noch finden ... [Weiter auf Seite 5]"
                 ])
                 setSolved("all");
             } else {
-                setChat([...chat, `You: ${word1}, ${word2} and ${word3}?`, "Enigma: No, I don't think that's it."])
+                setChat([...chat, `You: ${name}?`, "Enigma: Nein, ich glaube da ist ein Fehler passiert."])
             }
         }
     }
@@ -52,25 +52,19 @@ const Forgery = (): ReactElement => {
             {
                 solved !== "none" ? null : (
                     <Stack direction="row">
-                        <Typography sx={{mt: '15px'}}>You: We think it was suspect #</Typography>
-                        <TextField variant="standard" focused color="success" value={chemist} onChange={({target}) => setChemist(target.value)}/>
+                        <Typography sx={{mt: '15px'}}>You: Der Ort heißt </Typography>
+                        <TextField variant="standard" focused color="success" value={location} onChange={({target}) => setLocation(target.value)}/>
                         <IconButton color="inherit" onClick={onClick}><Send /></IconButton>
                     </Stack>
                 )
             }
             {
-                solved !== "chemist" ? null : (
-                    <>
-                    <Typography sx={{mt: '15px'}}>You: The three words are</Typography> 
+                solved !== "location" ? null : (
                     <Stack direction="row">
-                        <TextField variant="standard" focused color="success" value={word1} onChange={({target}) => setWord1(target.value.toLowerCase())}/>
-                        <Typography sx={{mt: '15px'}}>,</Typography>
-                        <TextField variant="standard" focused color="success" value={word2} onChange={({target}) => setWord2(target.value.toLowerCase())}/>
-                        <Typography sx={{mt: '15px'}}>{" and "}</Typography>
-                        <TextField variant="standard" focused color="success" value={word3} onChange={({target}) => setWord3(target.value.toLowerCase())}/>
+                        <Typography sx={{mt: '15px'}}>You: Es war</Typography>
+                        <TextField variant="standard" focused color="success" value={name} onChange={({target}) => setName(target.value)}/>
                         <IconButton color="inherit" onClick={onClick}><Send /></IconButton>
                     </Stack>
-                    </>
                 )
             }
         </Panel>
