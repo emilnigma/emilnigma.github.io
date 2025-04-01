@@ -19,7 +19,7 @@ function Board() {
   const boardCmps = boardPositions.map((positionOnBoard) => {
     if (startingPosition === positionOnBoard) {
       return (
-        <Grid item xs={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
+        <Grid item xs={6} md={4} lg={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
           <Spot isDrop />
         </Grid>
       );
@@ -32,7 +32,7 @@ function Board() {
       if (chipOnBoard !== undefined) {
         const { value, kind: color } = chipOnBoard.chip;
         return (
-          <Grid item xs={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
+          <Grid item xs={6} md={4} lg={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
             <Ingredient {...{ value, kind: color }} />
           </Grid>
         );
@@ -45,7 +45,7 @@ function Board() {
     const hasRuby = rubyAt(positionOnBoard);
     const isHighlight = positionOnBoard === disableUntil + 1;
     return (
-      <Grid item xs={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
+      <Grid item xs={6} md={4} lg={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
         <Spot {...{
           currency, score, hasRuby, disabled, isHighlight,
         }}

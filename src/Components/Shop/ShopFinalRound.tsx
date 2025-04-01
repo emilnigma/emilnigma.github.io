@@ -15,7 +15,7 @@ function ShopFinalRound() {
     <>
       <Typography variant="h2" textAlign="center">Market</Typography>
       <Grid container spacing={1}>
-        <Grid item xs={GRID}>
+        <Grid item xs={6} md={4} lg={GRID}>
           <ShopItem
             name="Gold Hoarder"
             description="Exchange five Gold for one Victory Point."
@@ -26,7 +26,7 @@ function ShopFinalRound() {
             onClick={() => setStat({ currency: currency - 5, score: score + 1 })}
           />
         </Grid>
-        <Grid item xs={GRID}>
+        <Grid item xs={6} md={4} lg={GRID}>
           <ShopItem
             name="Rarer than Rubies"
             description="Exchange two Rubies for one Victory Point."
