@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack, useTheme, useMediaQuery } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
 import Start from './Start';
@@ -9,8 +9,11 @@ import PlayerActions from '../Player/PlayerActions';
 
 function Game() {
   const { players, getDisplayPlayer } = useStore();
+  const theme = useTheme();
+  const twoColumnLayout = useMediaQuery(theme.breakpoints.up('sm'))
   if (players.length === 0) return <div style={{ display: 'flex', justifyContent: 'center' }}><Start /></div>;
   const isShopping = getDisplayPlayer().phase === 4;
+  const height = twoColumnLayout ? '100vh' : 'auto';
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -20,7 +23,7 @@ function Game() {
         </Stack>
       </Grid>
       <Grid item xs={12} sm={6} md={8} lg={9}>
-        <Box sx={{ height: '100vh', p: 1, overflow: 'auto' }}>
+        <Box sx={{ height, p: 1, overflow: 'auto' }}>
           {isShopping ? <Shop /> : <Board />}
         </Box>
       </Grid>
