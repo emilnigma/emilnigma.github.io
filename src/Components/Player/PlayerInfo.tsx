@@ -1,6 +1,5 @@
 import {
-  Box,
-  CardMedia, Stack, Tab, Tabs, Typography,
+  Box, Stack, Tab, Tabs, Typography,
 } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
@@ -32,7 +31,7 @@ function PlayerInfo() {
       <Tabs value={store.displayPlayer} variant="fullWidth">
         {playerTabs}
       </Tabs>
-      <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+            <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
         <TextIcon
           text={symbol}
           rgb={mechanics.phase.rgb}
@@ -44,27 +43,33 @@ function PlayerInfo() {
         <CurrencyIcon text={currency} large />
         <RubyIcon text={rubies} large />
       </Stack>
-      <Box sx={{ height: 290 }}>
-        <CardMedia
-          sx={{
+      <Box sx={{ height: 280, display: 'flex', justifyContent: 'center' }}>
+          <div
+          style={{
             height: 340,
-            width: 340,
+            maxWidth: 340,
+            flexGrow: 1,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            mt: '-34px',
+            marginTop: '-38px',
+            backgroundPosition: 'center',
+            backgroundImage: `url("${mechanics.frame.img}")`,
+            backgroundSize: 'cover',
           }}
-          image={mechanics.frame.img}
+          // image={mechanics.frame.img}
         >
           <div style={{
             width: '80%',
             height: '80%',
+            backgroundPosition: 'center',
             backgroundImage: `url("${players[character].img}")`,
             backgroundSize: 'cover',
             maskImage: 'radial-gradient(circle at 50%, rgba(0, 0, 0, 1.0) 46%, transparent 52%)',
           }}
           />
-        </CardMedia>
+        </div>
+        
       </Box>
     </>
   );

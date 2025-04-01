@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
 import Start from './Start';
@@ -12,15 +12,19 @@ function Game() {
   if (players.length === 0) return <div style={{ display: 'flex', justifyContent: 'center' }}><Start /></div>;
   const isShopping = getDisplayPlayer().phase === 4;
   return (
-    <Stack direction="row" spacing={1}>
-      <Stack direction="column" spacing={0}>
-        <PlayerInfo />
-        <PlayerActions />
-      </Stack>
-      <Box sx={{ height: '100vh', p: 1, overflow: 'auto' }}>
-        {isShopping ? <Shop /> : <Board />}
-      </Box>
-    </Stack>
+    <Grid container spacing={1}>
+      <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Stack direction="column" spacing={1}>
+          <PlayerInfo />
+          <PlayerActions />
+        </Stack>
+      </Grid>
+      <Grid item xs={12} sm={6} md={8} lg={9}>
+        <Box sx={{ height: '100vh', p: 1, overflow: 'auto' }}>
+          {isShopping ? <Shop /> : <Board />}
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 
