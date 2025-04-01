@@ -64,12 +64,13 @@ const PlayerBrewingActions = observer(() => {
 const PlayerSellActions = observer(() => {
   const store = useStore();
   const {
-    chipsOnBoard, claimRuby, claimCurrency, claimScore, advancePhase, potion,
+    chipsOnBoard, claimRuby, claimCurrency, claimScore, advancePhase, potion, effects: { fireResistance = 7 }
   } = store.getDisplayPlayer();
   const numberOfWhites = chipsOnBoard
     .filter(({ chip }) => chip.kind === 'Fire Lily')
     .reduce((sum, { chip }) => sum + chip.value, 0);
-  if (numberOfWhites > 7) {
+  const isCauldronExploded = numberOfWhites > fireResistance;
+  if (isCauldronExploded) {
     return (
       <>
         <ListItem sx={{ justifyContent: 'center' }}>

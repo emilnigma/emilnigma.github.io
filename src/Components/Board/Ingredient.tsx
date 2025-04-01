@@ -4,6 +4,7 @@ import {
 import { sizes } from '../../Assets/Theme';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
+import { GRID_HEIGHT } from './Board';
 
 export type IngredientProps = {
   value: number,
@@ -21,7 +22,7 @@ function Ingredient({ value, kind: color }: IngredientProps) {
       }}
       >
         <CardMedia
-          sx={{ height: 60 }}
+          sx={{ height: GRID_HEIGHT }}
           image={ingredients[color].img}
         >
           <Avatar

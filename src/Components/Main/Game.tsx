@@ -13,7 +13,7 @@ function Game() {
   const isShopping = getDisplayPlayer().phase === 4;
   return (
     <Stack direction="row" spacing={1}>
-      <Stack direction="column" spacing={1}>
+      <Stack direction="column" spacing={0}>
         <PlayerInfo />
         <PlayerActions />
       </Stack>

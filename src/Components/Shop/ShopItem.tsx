@@ -48,7 +48,7 @@ function ShopItem({
                   rgb={rgb}
                   text={cost}
                   small
-                  sx={{ filter: player[costKind] < cost ? 'grayscale(100%)' : 'none' }}
+                  sx={{ filter: player[costKind] < cost ? 'grayscale(90%)' : 'none' }}
                 />
                 )}
             >

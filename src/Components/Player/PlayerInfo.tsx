@@ -26,7 +26,7 @@ function PlayerInfo() {
   const { symbol, title } = phases[phase];
   return (
     <>
-      <Typography textAlign="center" sx={{ mb: -2 }}>
+      <Typography textAlign="center" sx={{ mb: -1 }}>
         {`Round ${store.round}`}
       </Typography>
       <Tabs value={store.displayPlayer} variant="fullWidth">
@@ -44,7 +44,7 @@ function PlayerInfo() {
         <CurrencyIcon text={currency} large />
         <RubyIcon text={rubies} large />
       </Stack>
-      <Box sx={{ height: 275 }}>
+      <Box sx={{ height: 290 }}>
         <CardMedia
           sx={{
             height: 340,
@@ -52,7 +52,7 @@ function PlayerInfo() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            mt: '-44px',
+            mt: '-34px',
           }}
           image={mechanics.frame.img}
         >

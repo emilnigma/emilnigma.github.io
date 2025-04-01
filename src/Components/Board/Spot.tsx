@@ -2,6 +2,7 @@ import { Card, CardMedia, Stack } from '@mui/material';
 import { observer } from 'mobx-react';
 import { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
 import mechanics from '../../Assets/Mechanics';
+import { GRID_HEIGHT } from './Board';
 
 type SquareProps = {
     currency?: number,
@@ -23,7 +24,7 @@ function Spot(props: SquareProps) {
         sx={{ border: `3px solid ${mechanics.cards.rgb}`, backgroundColor: 'transparent' }}
       >
         <CardMedia
-          sx={{ height: 60 }}
+          sx={{ height: GRID_HEIGHT }}
           image={mechanics.drop.img}
         />
       </Card>
@@ -34,7 +35,7 @@ function Spot(props: SquareProps) {
       <Card
         elevation={0}
         sx={{
-          border: `3px solid ${mechanics.empty.rgb}`, backgroundColor: 'transparent', height: 60,
+          border: `3px solid ${mechanics.empty.rgb}`, backgroundColor: 'transparent', height: GRID_HEIGHT,
         }}
       />
     );
@@ -46,13 +47,13 @@ function Spot(props: SquareProps) {
     <Card
       elevation={0}
       sx={{
-        filter: !isHighlight ? 'grayscale(100%)' : 'none',
+        filter: !isHighlight ? 'grayscale(90%)' : 'none',
         border: `3px solid ${isHighlight ? mechanics.phase.rgb : 'transparent'}`,
         backgroundColor: mechanics.empty.rgb,
         transition: '.5s',
       }}
     >
-      <CardMedia sx={{ height: 60, display: 'flex' }}>
+      <CardMedia sx={{ height: GRID_HEIGHT, display: 'flex' }}>
         <Stack direction="row" spacing={isHighlight ? 1 : -1.7} flexGrow={1} justifyContent="center" alignItems="center">
           {scoreCmp}
           {currencyCmp}

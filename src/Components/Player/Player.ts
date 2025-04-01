@@ -112,7 +112,7 @@ export default class Player implements PlayerStats {
     const [prevChip] = this.getHighestChipOnBoard();
     const position = prevChip ? prevChip.position : this.startingPosition;
     if (position >= 52) {
-      this.advancePhase();
+      this.createPotion();
     } else {
       this.chipsOnBoard.push({ position: position + chip.value, chip });
     }

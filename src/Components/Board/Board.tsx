@@ -7,7 +7,8 @@ import Spot from './Spot';
 import { useStore } from '../../Core/Store';
 import Ingredient from './Ingredient';
 
-const GRID = 2;
+const GRID = 12/5;
+export const GRID_HEIGHT = 80
 
 function Board() {
   const { displayPlayer, players } = useStore();

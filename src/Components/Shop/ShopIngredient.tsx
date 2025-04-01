@@ -32,7 +32,7 @@ function ShopIngredient({ ingredient }: ShopItemProps) {
           <CurrencyIcon
             text={adjustedCost}
             small
-            sx={{ filter: adjustedCost > currency ? 'grayscale(100%)' : 'none' }}
+            sx={{ filter: adjustedCost > currency ? 'grayscale(90%)' : 'none' }}
           />
       )}
       >

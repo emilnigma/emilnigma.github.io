@@ -12,6 +12,10 @@ const potions: PotionInfo = [
     description: 'You brewed a common red potion.',
   },
   {
+    img: `${PATH}blue_potion.png`,
+    description: 'You brewed a simple blue potion.',
+  },
+  {
     img: `${PATH}snow_draught.png`,
     description: 'You brewed a common snow draught.',
   },
@@ -24,8 +28,12 @@ const potions: PotionInfo = [
     description: 'The thick nectar reflects light like the surface of the moon.',
   },
   {
+    img: `${PATH}fertile_concoction.png`,
+    description: 'You created a fertile concoction.',
+  },
+  {
     img: `${PATH}lovers_potion.png`,
-    description: 'Your potion gives off a seductive smell.',
+    description: 'The resulting love potion gives off a seductive smell.',
   },
   {
     img: `${PATH}fiery_oil.png`,
