@@ -29,10 +29,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: page
-          path: .
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: page
+      #     path: .
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node
