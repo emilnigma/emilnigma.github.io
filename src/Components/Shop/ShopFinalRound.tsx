@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';

@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { sizes } from '../Assets/Theme';
 import mechanics from '../Assets/Mechanics';

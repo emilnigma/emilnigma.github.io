@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Stack } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';

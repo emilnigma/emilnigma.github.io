@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardMedia, Stack } from '@mui/material';
 import { observer } from 'mobx-react';
 import { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';

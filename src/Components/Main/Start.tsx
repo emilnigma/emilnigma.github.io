@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Button, Chip, Grid, IconButton, Input, List, ListItem, Stack, Typography,
 } from '@mui/material';
