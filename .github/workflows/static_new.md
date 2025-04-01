@@ -35,6 +35,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
         with:
           # Upload entire repository
           path: '.'
