@@ -64,7 +64,7 @@ const PlayerBrewingActions = observer(() => {
 const PlayerSellActions = observer(() => {
   const store = useStore();
   const {
-    chipsOnBoard, claimRuby, claimCurrency, claimScore, advancePhase, potion, effects: { fireResistance = 7 }
+    chipsOnBoard, claimRuby, claimCurrency, claimScore, advancePhase, potion, effects: { fireResistance = 7 },
   } = store.getDisplayPlayer();
   const numberOfWhites = chipsOnBoard
     .filter(({ chip }) => chip.kind === 'Fire Lily')

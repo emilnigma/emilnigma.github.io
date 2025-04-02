@@ -31,7 +31,7 @@ function PlayerInfo() {
       <Tabs value={store.displayPlayer} variant="fullWidth">
         {playerTabs}
       </Tabs>
-            <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+      <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
         <TextIcon
           text={symbol}
           rgb={mechanics.phase.rgb}
@@ -44,7 +44,7 @@ function PlayerInfo() {
         <RubyIcon text={rubies} large />
       </Stack>
       <Box sx={{ height: 280, display: 'flex', justifyContent: 'center' }}>
-          <div
+        <div
           style={{
             height: 340,
             maxWidth: 340,
@@ -57,7 +57,6 @@ function PlayerInfo() {
             backgroundImage: `url("${mechanics.frame.img}")`,
             backgroundSize: 'cover',
           }}
-          // image={mechanics.frame.img}
         >
           <div style={{
             width: '80%',
@@ -69,7 +68,7 @@ function PlayerInfo() {
           }}
           />
         </div>
-        
+
       </Box>
     </>
   );

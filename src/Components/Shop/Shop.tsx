@@ -21,7 +21,7 @@ function Shop() {
       <Typography variant="h2" textAlign="center">Market</Typography>
       <Grid container spacing={1}>
         {Object.keys(ingredients).map((ingredient) => (
-          <Grid item  xs={6} md={4} lg={GRID} key={`ingredient-${ingredient}`}>
+          <Grid item xs={6} md={4} lg={GRID} key={`ingredient-${ingredient}`}>
             <ShopIngredient ingredient={ingredient as keyof typeof ingredients} />
           </Grid>
         ))}

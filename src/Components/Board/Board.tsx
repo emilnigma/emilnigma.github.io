@@ -7,14 +7,14 @@ import Spot from './Spot';
 import { useStore } from '../../Core/Store';
 import Ingredient from './Ingredient';
 
-const GRID = 12/5;
-export const GRID_HEIGHT = 80
+const GRID = 12 / 5;
+export const GRID_HEIGHT = 80;
 
 function Board() {
   const { displayPlayer, players } = useStore();
   const { startingPosition, getChipOnBoard, getHighestChipOnBoard } = players[displayPlayer];
   const highestChips = getHighestChipOnBoard();
-  const disableUntil = highestChips.length > 0 ? highestChips[0].position : -9;
+  const disableUntil = highestChips.length > 0 ? highestChips[0].position : startingPosition;
 
   const boardCmps = boardPositions.map((positionOnBoard) => {
     if (startingPosition === positionOnBoard) {
