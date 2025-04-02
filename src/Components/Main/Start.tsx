@@ -59,7 +59,7 @@ function Start() {
     <Stack direction="column" spacing={3} sx={{ maxWidth, m: 1 }}>
       <Typography variant="h2" textAlign="center">Brewery</Typography>
 
-      <Typography>
+      <Typography component="div">
         Welcome to the Brewery. You can brew various potions by drawing
         ingredient cards
         <span style={{ whiteSpace: 'nowrap', color: 'grey' }}>
