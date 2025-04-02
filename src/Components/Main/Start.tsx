@@ -1,23 +1,21 @@
 import { useState } from 'react';
 import {
-  Button, Chip, Grid, IconButton, Input, List, ListItem, Stack, Typography,
+  Button, Chip, IconButton, Input, Stack, Typography,
 } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
-import Ingredient from '../Board/Ingredient';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
 import potions from '../../Assets/Potions';
-import { randomBetween } from '../../Core/Random';
 
-const width = '500px';
+const maxWidth = '500px';
 
 function Start() {
   const { startGame, settings, setSettings } = useStore();
   const [newPlayer, setNewPlayer] = useState('');
-  const [playerList, setPlayerList] = useState(['Elena', 'Jonas']);
+  const [playerList, setPlayerList] = useState(['Alice', 'Bob']);
   const removePlayer = (p1: string) => {
     const filtered = playerList.filter((p2) => p1 !== p2);
     setPlayerList([...filtered]);
@@ -35,20 +33,20 @@ function Start() {
     </IconButton>
   );
   const playerCmps = playerList.map((p) => <Chip label={p} variant="filled" key={`player-${p}`} onDelete={() => removePlayer(p)} />);
-  const ingredientCmps = Object.entries(ingredients).map(([_key]) => {
-    const key = _key as keyof typeof ingredients;
-    // TODO
-    // const onClick = () => {};
-    const value = settings.ingredients.includes(key) ? 1 : 0;
-    return (
-      <Grid item xs={4} key={`available-${key}-${randomBetween(0, 1000)}`}>
-        <Ingredient kind={key} value={value} />
-      </Grid>
-    );
-  });
-  const starterCmps = settings.startDeck.map(({ kind, value }) => (
-    <ListItem key={`starter-${kind}-${value}-${randomBetween(0, 1000)}`}>{`${kind} (${value})`}</ListItem>
-  ));
+  // const ingredientCmps = Object.entries(ingredients).map(([_key]) => {
+  //   const key = _key as keyof typeof ingredients;
+  //   // TODO
+  //   // const onClick = () => {};
+  //   const value = settings.ingredients.includes(key) ? 1 : 0;
+  //   return (
+  //     <Grid item xs={4} key={`available-${key}-${randomBetween(0, 1000)}`}>
+  //       <Ingredient kind={key} value={value} />
+  //     </Grid>
+  //   );
+  // });
+  // const starterCmps = settings.startDeck.map(({ kind, value }) => (
+  //   <ListItem key={`starter-${kind}-${value}-${randomBetween(0, 1000)}`}>{`${kind} (${value})`}</ListItem>
+  // ));
   const allAssets = [
     ...Object.values(ingredients).map(({ img }) => img),
     ...Object.values(mechanics).map(({ img }) => img),
@@ -57,14 +55,14 @@ function Start() {
   ];
   const assetCmps = allAssets.map((src) => <img width={30} src={src} alt="" key={src} />);
   return (
-    <Stack direction="column" spacing={3} sx={{ width }}>
-      <Typography variant="h1" textAlign="center">Brewery</Typography>
+    <Stack direction="column" spacing={3} sx={{ maxWidth, m: 1 }}>
+      <Typography variant="h2" textAlign="center">Brewery</Typography>
 
       <Button
         onClick={() => startGame(playerList)}
         disabled={playerList.length < 1}
         variant="contained"
-        sx={{ width }}
+        sx={{ maxWidth }}
       >
         Start Game
       </Button>
@@ -92,7 +90,7 @@ function Start() {
         />
       </div>
 
-      <div>
+      {/* <div>
         <Typography variant="h4">Available Ingredients</Typography>
         <Grid container spacing={1}>
           {ingredientCmps}
@@ -102,9 +100,9 @@ function Start() {
       <div>
         <Typography variant="h4">Starter Ingredients</Typography>
         <List dense>{starterCmps}</List>
-      </div>
+      </div> */}
 
-      <div>
+      <div style={{ height: 0, overflow: 'hidden' }}>
         <Typography variant="h4">Preload Assets</Typography>
         {assetCmps}
       </div>
