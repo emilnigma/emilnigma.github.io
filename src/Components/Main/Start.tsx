@@ -9,6 +9,7 @@ import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
 import potions from '../../Assets/Potions';
+import TextIcon, { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
 
 const maxWidth = '500px';
 
@@ -57,6 +58,35 @@ function Start() {
   return (
     <Stack direction="column" spacing={3} sx={{ maxWidth, m: 1 }}>
       <Typography variant="h2" textAlign="center">Brewery</Typography>
+
+      <Typography>
+        Welcome to the Brewery. You can brew various potions by drawing
+        ingredient cards
+        <span style={{ whiteSpace: 'nowrap', color: 'grey' }}>
+          {' '}
+          <TextIcon img={mechanics.cards.img} rgb={mechanics.cards.rgb} sx={{ width: '1rem', height: '1rem' }} />
+          {' Ingredient Cards '}
+        </span>
+        from your deck. Selling your potions will earn you
+        <span style={{ whiteSpace: 'nowrap', color: mechanics.currency.rgb }}>
+          {' '}
+          <CurrencyIcon sx={{ width: '1rem', height: '1rem' }} />
+          {' Gold '}
+        </span>
+        and
+        <span style={{ whiteSpace: 'nowrap', color: mechanics.rubies.rgb }}>
+          {' '}
+          <RubyIcon sx={{ width: '1rem', height: '1rem' }} />
+          {' Rubies '}
+        </span>
+        which can be used to buy more powerful ingredients. Your goal is to collect more
+        <span style={{ whiteSpace: 'nowrap', color: mechanics.score.rgb }}>
+          {' '}
+          <ScoreIcon sx={{ width: '1rem', height: '1rem' }} />
+          {' Victory Points '}
+        </span>
+        than your opponents.
+      </Typography>
 
       <Button
         onClick={() => startGame(playerList)}

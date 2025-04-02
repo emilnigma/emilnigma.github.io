@@ -1,5 +1,5 @@
 import {
-  Box, Grid, Stack, useTheme, useMediaQuery, Snackbar,
+  Box, Grid, Stack, useTheme, useMediaQuery,
 } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
@@ -18,13 +18,6 @@ function Game() {
   const height = twoColumnLayout ? '100vh' : 'auto';
   return (
     <Grid container spacing={1}>
-      <Snackbar
-        open
-        autoHideDuration={6000}
-        // onClose={handleClose}
-        message="Tutorial "
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      />
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Stack direction="column" spacing={1}>
           <PlayerInfo />
