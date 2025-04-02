@@ -61,13 +61,22 @@ function Start() {
 
       <Typography component="div">
         Welcome to the Brewery. You can brew various potions by drawing
-        ingredient cards
-        <span style={{ whiteSpace: 'nowrap', color: 'grey' }}>
+        <span style={{ whiteSpace: 'nowrap', color: mechanics.cards.rgb }}>
           {' '}
           <TextIcon img={mechanics.cards.img} rgb={mechanics.cards.rgb} sx={{ width: '1rem', height: '1rem' }} />
           {' Ingredient Cards '}
         </span>
-        from your deck. Selling your potions will earn you
+        from your deck. But watch out! If you use more than seven
+        <span style={{ whiteSpace: 'nowrap', color: '#c57d54' }}>
+          {' '}
+          <TextIcon img={ingredients['Fire Lily'].img} rgb="red" sx={{ width: '1rem', height: '1rem' }} />
+          {' Fire Lilies '}
+        </span>
+        your cauldron will explode.
+      </Typography>
+
+      <Typography component="div">
+        Selling your potions will earn you
         <span style={{ whiteSpace: 'nowrap', color: mechanics.currency.rgb }}>
           {' '}
           <CurrencyIcon sx={{ width: '1rem', height: '1rem' }} />

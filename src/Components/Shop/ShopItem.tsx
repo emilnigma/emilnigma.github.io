@@ -32,7 +32,7 @@ function ShopItem({
     >
       <CardMedia
         sx={{ height }}
-        image={image ?? mechanics.drop.img}
+        image={image ?? mechanics.cauldron.img}
       />
       <CardContent sx={{ display: 'flex' }}>
         <Stack direction="column">

@@ -14,7 +14,7 @@ function Shop() {
   if (round === settings.rounds) return <ShopFinalRound />;
 
   const {
-    setStat, rubies, startingPosition, effects: { hasDilute = false },
+    setStat, rubies, startingPosition, effects: { hasDilute = false, fireResistance = 7 },
   } = getDisplayPlayer();
   return (
     <>
@@ -39,10 +39,20 @@ function Shop() {
         <Grid item xs={6} md={4} lg={GRID}>
           <ShopItem
             name="Advantage"
-            description="Permanently move your starting position by one to get a head start."
+            description="Permanently move your starting position by one spot. This way you get a head start in the following rounds."
             cost={2}
             costKind="rubies"
             onClick={() => setStat({ rubies: rubies - 2, startingPosition: startingPosition + 1 })}
+          />
+        </Grid>
+        <Grid item xs={6} md={4} lg={GRID}>
+          <ShopItem
+            name="Fire Resistance"
+            description="Permanently reinforce your cauldron thereby increasing your resistance to Fire Lilies by one."
+            image={mechanics.fire_resistance.img}
+            cost={2}
+            costKind="rubies"
+            onClick={() => setStat({ rubies: rubies - 2, effects: { fireResistance: fireResistance + 1 } })}
           />
         </Grid>
       </Grid>

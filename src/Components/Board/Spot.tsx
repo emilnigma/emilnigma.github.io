@@ -25,7 +25,7 @@ function Spot(props: SquareProps) {
       >
         <CardMedia
           sx={{ height: GRID_HEIGHT }}
-          image={mechanics.drop.img}
+          image={mechanics.cauldron.img}
         />
       </Card>
     );

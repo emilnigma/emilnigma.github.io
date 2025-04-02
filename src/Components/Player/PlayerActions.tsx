@@ -25,7 +25,7 @@ const PlayerBrewingActions = observer(() => {
   return (
     <>
       {!isCauldronExploded ? null : (
-        <Typography>{`Your cauldron exploded with ${numberOfWhites} Fire Lilies.`}</Typography>
+        <Typography>{`Your cauldron exploded due to ${numberOfWhites} Fire Lilies. Your Fire Resistance is ${fireResistance} and can be increased at the Market.`}</Typography>
       )}
       {!isBagEmpty ? null : (
         <Typography>There are no more Ingredients left.</Typography>

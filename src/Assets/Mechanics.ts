@@ -1,6 +1,9 @@
 const mechanics = {
-  drop: {
+  cauldron: {
     img: 'assets/mechanics/cauldron.jpg',
+  },
+  fire_resistance: {
+    img: 'assets/mechanics/fire_resistance.jpg',
   },
   empty: {
     img: 'assets/potions/empty.png',

@@ -28,7 +28,7 @@ const ingredients: IngredientAsset = {
   'Humble Carrot': {
     img: 'assets/ingredients/carrot.jpg',
     available: [{ value: 1, cost: 3 }],
-    description: 'Carrots are not magic. Together with Mushrooms they can quickly help brew valuable potions.',
+    description: 'Carrots are not magic. Together with Mushrooms, however, they can quickly help to brew valuable potions.',
   },
   'Blue Trumpet Mushroom': {
     img: 'assets/ingredients/blue_trumpet_mushrooms.jpg',
@@ -45,7 +45,7 @@ const ingredients: IngredientAsset = {
   'Clover Leaf': {
     img: 'assets/ingredients/clover_leaf.jpg',
     available: [{ value: 1, cost: 4 }, { value: 2, cost: 8 }, { value: 4, cost: 14 }],
-    description: 'If you are lucky and the clover leaf is your penultimate or last card you receive an extra ruby.',
+    description: 'If you are lucky and the Clover Leaf is your penultimate or last Ingredient Card you receive an extra ruby.',
     condition: () => {
       const { player } = effectBase();
       const highestChips = player.getHighestChipOnBoard();
