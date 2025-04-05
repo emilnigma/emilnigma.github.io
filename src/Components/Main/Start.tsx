@@ -10,6 +10,7 @@ import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
 import potions from '../../Assets/Potions';
 import TextIcon, { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
+import Player from '../Player/Player';
 
 const maxWidth = '500px';
 
@@ -17,7 +18,13 @@ function Start() {
   const {
     startGame, settings, setSettings, restoreGame,
   } = useStore();
+
   const [hasPrevGame, setHasPrevGame] = useState(Store.readGame());
+  const { round: prevRound, players: _prevPlayers } = hasPrevGame
+    ? JSON.parse(localStorage.getItem('saveGame')!)
+    : { round: 0, players: [] };
+  const prevPlayers = _prevPlayers as Player[];
+
   const [newPlayer, setNewPlayer] = useState('');
   const [playerList, setPlayerList] = useState(['Alice', 'Bob']);
   const removePlayer = (p1: string) => {
@@ -59,10 +66,23 @@ function Start() {
   ];
   const assetCmps = allAssets.map((src) => <img width={30} src={src} alt="" key={src} />);
   return (
-    <Stack direction="column" spacing={3} sx={{ maxWidth, m: 1 }}>
+    <Stack direction="column" spacing={1} sx={{ maxWidth, m: 1 }}>
+
+      <div style={{
+        width: '100%',
+        height: '100px',
+        backgroundPosition: 'top',
+        backgroundImage: 'url("assets/potions/empty.png")',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        marginBottom: -20,
+        // maskImage: 'gradient(rgba(0, 0, 0, 1.0) 46%, transparent 52%)',
+      }}
+      />
+
       <Typography variant="h2" textAlign="center">Brewery</Typography>
 
-      <Typography component="div">
+      <Typography component="div" sx={{ pt: 3 }}>
         Welcome to the Brewery. You can brew various potions by drawing
         <span style={{ whiteSpace: 'nowrap', color: mechanics.cards.rgb }}>
           {' '}
@@ -78,7 +98,7 @@ function Start() {
         your cauldron will explode.
       </Typography>
 
-      <Typography component="div">
+      <Typography component="div" sx={{ pb: 3 }}>
         Selling your potions will earn you
         <span style={{ whiteSpace: 'nowrap', color: mechanics.currency.rgb }}>
           {' '}
@@ -116,10 +136,9 @@ function Start() {
             <ButtonGroup variant="outlined">
               <Button
                 onClick={restoreGame}
-                // sx={{ maxWidth }}
                 fullWidth
               >
-                Resume Previous Game
+                {`Resume Game - Round ${prevRound} - ${prevPlayers.map(({ name }) => name).join(', ')}`}
               </Button>
               <Button
                 onClick={() => { Store.clearGame(); setHasPrevGame(false); }}
