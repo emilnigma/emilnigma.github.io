@@ -3,7 +3,7 @@ import {
   Button, Card, List, ListItem, Stack, Typography,
 } from '@mui/material';
 import { observer } from 'mobx-react';
-import { useStore } from '../../Core/Store';
+import Store, { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 import potions from '../../Assets/Potions';
 import { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
@@ -206,6 +206,7 @@ const PlayerDoneActions = observer(() => {
     );
   }
   const isGameOver = round >= settings.rounds;
+  if (isGameOver) Store.clearGame();
   const rankingCmps = [...players]
     .sort((p1, p2) => p2.score - p1.score)
     .map(({ name, score }) => (

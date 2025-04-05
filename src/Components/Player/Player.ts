@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { IngredientProps } from '../Board/Ingredient';
-import { Settings } from '../../Core/Store';
+import Store from '../../Core/Store';
 import {
   currencyPointsAt, potionAt, rubyAt, scorePointsAt,
 } from '../../Assets/BoardPositions';
@@ -14,7 +14,16 @@ type Effects = Partial<{
   fireResistance: number // todo
 }>;
 
-interface PlayerStats {
+export interface PlayerProps {
+  name: string;
+  character: number;
+  chipsInBag: IngredientProps[];
+  chipsInShoppingCart: (IngredientProps | string)[];
+  chipsOnBoard: {position: number, chip: IngredientProps}[];
+  phase: PhaseNumber;
+}
+
+export interface PlayerStats {
   startingPosition: number
   score: number
   currency: number
@@ -23,7 +32,7 @@ interface PlayerStats {
   effects: Effects
 }
 
-export default class Player implements PlayerStats {
+export default class Player implements PlayerProps, PlayerStats {
   // character
   name: string;
   character: number;
@@ -32,18 +41,20 @@ export default class Player implements PlayerStats {
   chipsInBag: IngredientProps[];
   chipsInShoppingCart: (IngredientProps | string)[];
   chipsOnBoard: {position: number, chip: IngredientProps}[];
+  phase: PhaseNumber;
+
+  // stats
   startingPosition: number;
   score: number;
   currency: number;
   rubies: number;
-  phase: PhaseNumber;
   potion: number;
   effects: Effects;
 
-  constructor(name: string, character: number, settings: Settings) {
+  constructor(name: string, character: number, store: Store) {
     this.name = name;
     this.character = character;
-    this.chipsInBag = shuffle(settings.startDeck);
+    this.chipsInBag = shuffle(store.settings.startDeck);
     this.chipsOnBoard = [];
     this.chipsInShoppingCart = [];
     this.startingPosition = 0;
@@ -165,5 +176,23 @@ export default class Player implements PlayerStats {
     this.chipsInBag = shuffle([...chips, ...this.chipsInBag]);
     this.chipsOnBoard = [];
     this.phase = 1;
+  };
+
+  static fromJSON = (props: PlayerProps & PlayerStats, store: Store): Player => {
+    const {
+      name, character, chipsInBag, chipsInShoppingCart, phase,
+      startingPosition, score, currency, rubies, potion, effects,
+    } = props;
+    const player = new Player(name, character, store);
+    player.chipsInBag = chipsInBag;
+    player.chipsInShoppingCart = chipsInShoppingCart;
+    player.phase = phase;
+    player.startingPosition = startingPosition;
+    player.score = score;
+    player.currency = currency;
+    player.rubies = rubies;
+    player.potion = potion;
+    player.effects = effects;
+    return player;
   };
 };

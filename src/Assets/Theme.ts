@@ -45,6 +45,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
+          borderWidth: '2px',
+          '&:hover': {
+            borderWidth: '2px',
+          },
         },
       },
     },

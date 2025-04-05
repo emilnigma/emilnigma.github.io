@@ -48,7 +48,7 @@ function Spot(props: SquareProps) {
       elevation={0}
       sx={{
         filter: !isHighlight ? 'grayscale(90%)' : 'none',
-        border: `3px solid ${isHighlight ? mechanics.phase.rgb : 'transparent'}`,
+        border: `3px solid ${isHighlight ? mechanics.cards.rgb : 'transparent'}`,
         backgroundColor: mechanics.empty.rgb,
         transition: '.5s',
       }}

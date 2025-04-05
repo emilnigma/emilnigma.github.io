@@ -50,9 +50,9 @@ function Shop() {
             name="Fire Resistance"
             description="Permanently reinforce your cauldron thereby increasing your resistance to Fire Lilies by one."
             image={mechanics.fire_resistance.img}
-            cost={2}
+            cost={3}
             costKind="rubies"
-            onClick={() => setStat({ rubies: rubies - 2, effects: { fireResistance: fireResistance + 1 } })}
+            onClick={() => setStat({ rubies: rubies - 3, effects: { fireResistance: fireResistance + 1 } })}
           />
         </Grid>
       </Grid>

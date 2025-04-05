@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {
-  Button, Chip, IconButton, Input, Stack, Typography,
+  Button, ButtonGroup, Chip, IconButton, Input, Stack, Typography,
 } from '@mui/material';
-import { Add } from '@mui/icons-material';
+import { Add, Delete } from '@mui/icons-material';
 import { observer } from 'mobx-react';
-import { useStore } from '../../Core/Store';
+import Store, { useStore } from '../../Core/Store';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
@@ -14,7 +14,10 @@ import TextIcon, { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
 const maxWidth = '500px';
 
 function Start() {
-  const { startGame, settings, setSettings } = useStore();
+  const {
+    startGame, settings, setSettings, restoreGame,
+  } = useStore();
+  const [hasPrevGame, setHasPrevGame] = useState(Store.readGame());
   const [newPlayer, setNewPlayer] = useState('');
   const [playerList, setPlayerList] = useState(['Alice', 'Bob']);
   const removePlayer = (p1: string) => {
@@ -100,11 +103,33 @@ function Start() {
       <Button
         onClick={() => startGame(playerList)}
         disabled={playerList.length < 1}
-        variant="contained"
+        variant="outlined"
         sx={{ maxWidth }}
       >
         Start Game
       </Button>
+
+      {
+        !hasPrevGame
+          ? null
+          : (
+            <ButtonGroup variant="outlined">
+              <Button
+                onClick={restoreGame}
+                // sx={{ maxWidth }}
+                fullWidth
+              >
+                Resume Previous Game
+              </Button>
+              <Button
+                onClick={() => { Store.clearGame(); setHasPrevGame(false); }}
+                size="small"
+              >
+                <Delete />
+              </Button>
+            </ButtonGroup>
+          )
+      }
 
       <div>
         <Typography variant="h4">Players</Typography>
