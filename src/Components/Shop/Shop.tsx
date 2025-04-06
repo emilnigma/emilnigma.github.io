@@ -18,7 +18,7 @@ function Shop() {
   } = getDisplayPlayer();
   return (
     <>
-      <Typography variant="h2" textAlign="center">Market</Typography>
+      <Typography variant="h2" textAlign="center">Marketplace</Typography>
       <Grid container spacing={1}>
         {Object.keys(ingredients).map((ingredient) => (
           <Grid item xs={6} md={4} lg={GRID} key={`ingredient-${ingredient}`}>

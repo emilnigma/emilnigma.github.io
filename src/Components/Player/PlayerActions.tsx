@@ -25,7 +25,7 @@ const PlayerBrewingActions = observer(() => {
   return (
     <>
       {!isCauldronExploded ? null : (
-        <Typography>{`Your cauldron exploded due to ${numberOfWhites} Fire Lilies. Your Fire Resistance is ${fireResistance} and can be increased at the Market.`}</Typography>
+        <Typography>{`Your cauldron exploded due to ${numberOfWhites} Fire Lilies. Your Fire Resistance is ${fireResistance} and can be increased at the Marketplace.`}</Typography>
       )}
       {!isBagEmpty ? null : (
         <Typography>There are no more Ingredients left.</Typography>
@@ -152,7 +152,7 @@ const PlayerEffectsActions = observer(() => {
   return (
     <>
       {effectCmps}
-      <Button fullWidth variant="outlined" onClick={() => advancePhase()}>Continue to Market</Button>
+      <Button fullWidth variant="outlined" onClick={() => advancePhase()}>Continue to Marketplace</Button>
     </>
   );
 });
@@ -172,7 +172,7 @@ const PlayerShopActions = observer(() => {
   return (
     <>
       {chipsInShoppingCart.length === 0 ? null : <List dense>{ingredientsCmps}</List>}
-      <Button fullWidth variant="outlined" onClick={() => exitShop()}>Exit Market</Button>
+      <Button fullWidth variant="outlined" onClick={() => exitShop()}>Exit Marketplace</Button>
     </>
   );
 });

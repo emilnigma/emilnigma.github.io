@@ -13,7 +13,7 @@ function ShopFinalRound() {
   } = player;
   return (
     <>
-      <Typography variant="h2" textAlign="center">Market</Typography>
+      <Typography variant="h2" textAlign="center">Marketplace</Typography>
       <Grid container spacing={1}>
         <Grid item xs={6} md={4} lg={GRID}>
           <ShopItem

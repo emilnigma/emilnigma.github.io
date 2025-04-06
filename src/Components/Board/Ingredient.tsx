@@ -31,7 +31,7 @@ function Ingredient({ value, kind: color }: IngredientProps) {
               width: S, height: S, backgroundColor: mechanics.cards.rgb, m: '-3px -3px', borderRadius: '3px',
             }}
           >
-            <Typography sx={{ color: 'black' }}>{value}</Typography>
+            <Typography sx={{ color: 'black' }} fontWeight={900}>{value}</Typography>
           </Avatar>
         </CardMedia>
       </Card>

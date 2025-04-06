@@ -27,7 +27,7 @@ export const rubyAt = (i: number) => rubyPositions.includes(i);
 
 // potions
 export const potionIncrements = [
-  0, 4, 7, 11, 14, 18, 21, 24, 28, 31, 35, 38,
+  0, 4, 7, 11, 14, 18, 21, 24, 28, 31, 35, 38, 41, 44,
 ];
 export const potionAt = (i: number) => potionIncrements
   .filter((s) => s <= i)

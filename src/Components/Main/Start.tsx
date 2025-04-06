@@ -68,21 +68,23 @@ function Start() {
   return (
     <Stack direction="column" spacing={1} sx={{ maxWidth, m: 1 }}>
 
+      <Typography variant="h2" textAlign="center" sx={{ zIndex: 1 }}>Brewery</Typography>
+
       <div style={{
         width: '100%',
-        height: '100px',
+        height: '300px',
         backgroundPosition: 'top',
-        backgroundImage: 'url("assets/potions/empty.png")',
+        backgroundImage: 'url("assets/mechanics/main.jpg")',
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
-        marginBottom: -20,
-        // maskImage: 'gradient(rgba(0, 0, 0, 1.0) 46%, transparent 52%)',
+        marginTop: -80,
+        marginBottom: -40,
+        maskImage: 'linear-gradient(transparent 5%, rgba(0, 0, 0, 1.0) 25%, rgba(0, 0, 0, 1.0) 78%, transparent 90%)',
+        zIndex: 0,
       }}
       />
 
-      <Typography variant="h2" textAlign="center">Brewery</Typography>
-
-      <Typography component="div" sx={{ pt: 3 }}>
+      <Typography component="div">
         Welcome to the Brewery. You can brew various potions by drawing
         <span style={{ whiteSpace: 'nowrap', color: mechanics.cards.rgb }}>
           {' '}
@@ -153,12 +155,12 @@ function Start() {
       <div>
         <Typography variant="h4">Players</Typography>
         <Input
-          placeholder="New Player Name"
+          placeholder="New Player"
           endAdornment={addButton}
           onChange={(e) => setNewPlayer(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') addPlayer(); }}
           value={newPlayer}
-          sx={{ width: '200px' }}
+          sx={{ width: '150px' }}
         />
         {playerCmps}
       </div>
@@ -169,7 +171,7 @@ function Start() {
           onChange={({ target: { value } }) => setSettings({ rounds: Number(value) })}
           value={settings.rounds}
           type="number"
-          sx={{ width: '200px' }}
+          sx={{ width: '150px' }}
         />
       </div>
 

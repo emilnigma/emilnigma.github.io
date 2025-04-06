@@ -32,7 +32,7 @@ function TextIcon({
         ...sx,
       }}
     >
-      <Typography variant={variant}>{text}</Typography>
+      <Typography variant={variant} fontFamily="PT Serif">{text}</Typography>
     </Box>
   );
 }

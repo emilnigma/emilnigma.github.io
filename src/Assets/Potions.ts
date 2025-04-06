@@ -40,6 +40,14 @@ const potions: PotionInfo = [
     description: 'You expertly bottle the volatile fiery oil.',
   },
   {
+    img: `${PATH}enchanted_soil.png`,
+    description: 'Enchanted soil is very popular amongst farmers.',
+  },
+  {
+    img: `${PATH}serum_of_the_winds.png`,
+    description: 'The serum of the winds allows its user to fly for a few moments.',
+  },
+  {
     img: `${PATH}liquid_luck.png`,
     description: 'Congratulations! You brewed liquid luck.',
   },

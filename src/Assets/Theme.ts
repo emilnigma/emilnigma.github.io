@@ -23,7 +23,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"PT Serif", "Garamond"',
+    fontFamily: '"IM Fell Great Primer", "PT Serif", "Garamond"',
     fontWeightRegular: 400,
   },
   components: {
