@@ -128,27 +128,30 @@ function Start() {
         variant="outlined"
         sx={{ maxWidth }}
       >
-        Start Game
+        {hasPrevGame ? 'Start new Game' : 'Start Game'}
       </Button>
 
       {
         !hasPrevGame
           ? null
           : (
-            <ButtonGroup variant="outlined">
-              <Button
-                onClick={restoreGame}
-                fullWidth
-              >
-                {`Resume Game - Round ${prevRound} - ${prevPlayers.map(({ name }) => name).join(', ')}`}
-              </Button>
-              <Button
-                onClick={() => { Store.clearGame(); setHasPrevGame(false); }}
-                size="small"
-              >
-                <Delete />
-              </Button>
-            </ButtonGroup>
+            <>
+              <ButtonGroup variant="outlined">
+                <Button
+                  onClick={restoreGame}
+                  fullWidth
+                >
+                  Resume Game
+                </Button>
+                <Button
+                  onClick={() => { Store.clearGame(); setHasPrevGame(false); }}
+                  size="small"
+                >
+                  <Delete />
+                </Button>
+              </ButtonGroup>
+              <Typography variant="caption" textAlign="center">{`Previous Game with ${prevPlayers.map(({ name }) => name).join(', ')} - Round ${prevRound}`}</Typography>
+            </>
           )
       }
 

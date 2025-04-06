@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material';
+import { createTheme, withTheme } from '@mui/material';
 import mechanics from './Mechanics';
 
 export const sizes = {
@@ -48,6 +48,7 @@ export const theme = createTheme({
           borderWidth: '2px',
           '&:hover': {
             borderWidth: '2px',
+            backgroundImage: 'url("assets/mechanics/button.jpg")',
           },
         },
       },
