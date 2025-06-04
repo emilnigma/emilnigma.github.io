@@ -19,6 +19,7 @@ function Ingredient({ value, kind: color }: IngredientProps) {
         border: `3px solid ${mechanics.cards.rgb}`,
         backgroundColor: mechanics.cards.rgb,
         boxSizing: 'border-box',
+        height: GRID_HEIGHT,
       }}
       >
         <CardMedia

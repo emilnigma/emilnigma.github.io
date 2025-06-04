@@ -9,7 +9,6 @@ import TextIcon from '../TextIcon';
 type ShopItemProps = {
   name: string
   cost: number
-  costKind: 'score' | 'currency' | 'rubies'
   description: string
   onClick: () => void
   disabled?: boolean
@@ -18,7 +17,7 @@ type ShopItemProps = {
 };
 
 function ShopItem({
-  name, cost, description, onClick, costKind, disabled, image, height = 120,
+  name, cost, description, onClick, disabled, image, height = 120,
 }: ShopItemProps) {
   const player = useStore().getDisplayPlayer();
   const { img, rgb } = mechanics[costKind];
@@ -48,13 +47,13 @@ function ShopItem({
                   rgb={rgb}
                   text={cost}
                   small
-                  sx={{ filter: player[costKind] < cost ? 'grayscale(90%)' : 'none' }}
+                  sx={{ filter: resource < cost ? 'grayscale(90%)' : 'none' }}
                 />
                 )}
             >
               <Button
                 variant="contained"
-                disabled={player[costKind] < cost || disabled}
+                disabled={resource < cost || disabled}
                 key="shop-item-cauldron"
                 onClick={() => { onClick(); player.addToCart(name); }}
                 sx={{ minWidth: 0 }}

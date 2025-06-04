@@ -1,76 +1,107 @@
 import {
-  Box, Stack, Tab, Tabs, Typography,
+  Box, Button, Menu, Stack, Typography,
 } from '@mui/material';
 import { observer } from 'mobx-react';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import { useState } from 'react';
 import { useStore } from '../../Core/Store';
 import players from '../../Assets/Players';
 
-import TextIcon, { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
+import {
+  CurrencyIcon, EmeraldIcon, RubyIcon, SapphireIcon, ScoreIcon, TopazIcon,
+} from '../TextIcon';
 import phases from '../../Assets/Phases';
 import mechanics from '../../Assets/Mechanics';
+import potions from '../../Assets/Potions';
 
 function PlayerInfo() {
   const store = useStore();
   const {
-    character, rubies, score, currency, phase,
+    name, character, score, currency, phase, potion,
   } = store.getDisplayPlayer();
-  const playerTabs = store.players.map(({ name }, i) => (
-    <Tab
-      label={<Typography>{name}</Typography>}
-      onClick={() => store.setDisplayPlayer(i)}
-      key={`player-tab-${name}`}
-      sx={{ minWidth: '20px', borderBottom: '1px solid rgba(255,255,255,0.2)' }}
-    />
-  ));
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const playerTabs = store.players
+    .filter((p) => p.name !== name)
+    .map((p, i) => (
+      <Button
+      // label={<Typography></Typography>}
+        onClick={() => { store.setDisplayPlayer(i); setAnchorEl(null); }}
+        key={`player-tab-${p.name}`}
+        sx={{ minWidth: '20px', borderBottom: '1px solid rgba(255,255,255,0.2)' }}
+      >
+        <Typography>{`Switch to ${p.name}`}</Typography>
+      </Button>
+    ));
   const { symbol, title } = phases[phase];
   return (
-    <>
-      <Typography textAlign="center" sx={{ mb: -1 }}>
-        {`Round ${store.round}`}
-      </Typography>
-      <Tabs value={store.displayPlayer} variant="fullWidth">
-        {playerTabs}
-      </Tabs>
-      <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
-        <TextIcon
-          text={symbol}
-          rgb={mechanics.phase.rgb}
-          img={mechanics.phase.img}
-          large
-        />
-        <Typography flexGrow={1}>{title}</Typography>
-        <ScoreIcon text={score} large />
-        <CurrencyIcon text={currency} large />
-        <RubyIcon text={rubies} large />
-      </Stack>
-      <Box sx={{ height: 280, display: 'flex', justifyContent: 'center' }}>
+    <Stack
+      direction="row"
+      sx={{
+        position: 'sticky', top: 0, backgroundColor: '#222222', zIndex: 99,
+
+      }}
+    >
+      <Box sx={{
+        width: 200, display: 'flex', justifyContent: 'center',
+      }}
+      >
         <div
           style={{
-            height: 340,
-            maxWidth: 340,
+            height: 200,
+            width: 200,
             flexGrow: 1,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '-38px',
+            // marginTop: '-38px',
             backgroundPosition: 'center',
             backgroundImage: `url("${mechanics.frame.img}")`,
             backgroundSize: 'cover',
           }}
         >
           <div style={{
-            width: '80%',
-            height: '80%',
+            width: '90%',
+            height: '90%',
+            marginTop: '2px',
             backgroundPosition: 'center',
-            backgroundImage: `url("${players[character].img}")`,
+            backgroundImage: phase === 2
+              ? `url("${potions[potion].img}")`
+              : `url("${players[character].img}")`,
             backgroundSize: 'cover',
-            maskImage: 'radial-gradient(circle at 50%, rgba(0, 0, 0, 1.0) 46%, transparent 52%)',
+            maskImage: 'radial-gradient(circle at 50%, rgba(0, 0, 0, 1) 52%, transparent 56%)',
           }}
           />
         </div>
-
       </Box>
-    </>
+
+      <Stack>
+        <Button variant="outlined" onClick={(e) => setAnchorEl(e.currentTarget)}>
+          <Typography>{name}</Typography>
+          <FormatListBulletedIcon sx={{ pl: 1 }} />
+        </Button>
+        <Menu
+          anchorEl={anchorEl}
+          open={anchorEl !== null}
+          onClose={() => setAnchorEl(null)}
+        >
+          <Typography>{`Round ${store.round} of ${store.settings.rounds}`}</Typography>
+          <Typography>{`Phase ${symbol}: ${title}`}</Typography>
+          {playerTabs}
+        </Menu>
+
+        <Stack direction="row">
+          <ScoreIcon text={score} large />
+          <CurrencyIcon text={currency.gold} large />
+        </Stack>
+
+        <Stack direction="row">
+          {currency.emerald === 0 ? null : <EmeraldIcon text={currency.emerald} large />}
+          {currency.ruby === 0 ? null : <RubyIcon text={currency.ruby} large />}
+          {currency.sapphire === 0 ? null : <SapphireIcon text={currency.sapphire} large />}
+          {currency.topaz === 0 ? null : <TopazIcon text={currency.topaz} large />}
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }
 

@@ -15,16 +15,40 @@ const mechanics = {
   },
   currency: {
     img: 'assets/mechanics/coin.png',
-    rgb: '#b48231',
+    rgb: '#eabc43',
     excess: 'assets/mechanics/currency.jpg',
   },
-  rubies: {
+  gems: {
+    img: 'assets/mechanics/gem.png',
+    rgb: '#a8ccd9',
+    excess: 'assets/mechanics/gems.jpg',
+  },
+  topaz: {
+    img: 'assets/mechanics/topaz.png',
+    rgb: '#f38110',
+    excess: 'assets/mechanics/gems.jpg',
+  },
+  emerald: {
+    img: 'assets/mechanics/emerald.png',
+    rgb: '#26a54e',
+    excess: 'assets/mechanics/emeralds.jpg',
+  },
+  sapphire: {
+    img: 'assets/mechanics/sapphire.png',
+    rgb: '#0d3e7f',
+    excess: 'assets/mechanics/sapphires.jpg',
+  },
+  ruby: {
     img: 'assets/mechanics/ruby.png',
-    rgb: 'rgb(244, 43, 79)',
+    rgb: '#f03847',
     excess: 'assets/mechanics/rubies.jpg',
   },
   cards: {
     img: 'assets/mechanics/card_deck.png',
+    rgb: '#ece6d1',
+  },
+  cardBack: {
+    img: 'assets/mechanics/card_back.jpg',
     rgb: '#ece6d1',
   },
   frame: {

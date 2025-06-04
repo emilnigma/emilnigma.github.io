@@ -6,8 +6,9 @@ import { observer } from 'mobx-react';
 import Store, { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 import potions from '../../Assets/Potions';
-import { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
+import { CurrencyIcon, EmeraldIcon, ScoreIcon } from '../TextIcon';
 import ingredients from '../../Assets/Ingredients';
+import { GRID_HEIGHT } from '../Board/Board';
 
 // BREWING PHASE
 const PlayerBrewingActions = observer(() => {
@@ -36,7 +37,7 @@ const PlayerBrewingActions = observer(() => {
           variant="outlined"
           // sx={{ justifyContent: 'center' }}
         >
-          <img src={mechanics.cards.img} width="180px" alt="" />
+          <img src={mechanics.cards.img} height={GRID_HEIGHT - 18} alt="" />
         </Button>
       )}
       {isCauldronExploded || isBoardEmpty || !hasDilute ? null : (
@@ -64,7 +65,7 @@ const PlayerBrewingActions = observer(() => {
 const PlayerSellActions = observer(() => {
   const store = useStore();
   const {
-    chipsOnBoard, claimRuby, claimCurrency, claimScore, advancePhase, potion, effects: { fireResistance = 7 },
+    chipsOnBoard, claimGems, claimCurrency, claimScore, advancePhase, potion, effects: { fireResistance = 7 },
   } = store.getDisplayPlayer();
   const numberOfWhites = chipsOnBoard
     .filter(({ chip }) => chip.kind === 'Fire Lily')
@@ -83,11 +84,11 @@ const PlayerSellActions = observer(() => {
             sx={{
               width: '50%', border: `1px solid ${mechanics.score.rgb}`, cursor: 'pointer', justifyContent: 'center',
             }}
-            onClick={() => { claimRuby(); claimScore(); advancePhase(); }}
+            onClick={() => { claimGems(); claimScore(); advancePhase(); }}
           >
             <Stack direction="row" spacing={-1.7} justifyContent="center">
               <ScoreIcon large />
-              <RubyIcon large />
+              <EmeraldIcon large />
             </Stack>
             <Button fullWidth sx={{ color: mechanics.score.rgb }}>
               Victory Points
@@ -98,11 +99,11 @@ const PlayerSellActions = observer(() => {
             sx={{
               width: '50%', border: `1px solid ${mechanics.currency.rgb}`, cursor: 'pointer', justifyContent: 'center',
             }}
-            onClick={() => { claimRuby(); claimCurrency(); advancePhase(); }}
+            onClick={() => { claimGems(); claimCurrency(); advancePhase(); }}
           >
             <Stack direction="row" spacing={-1.7} justifyContent="center">
               <CurrencyIcon large />
-              <RubyIcon large />
+              <EmeraldIcon large />
             </Stack>
             <Button fullWidth sx={{ color: mechanics.currency.rgb }}>
               Gold
@@ -114,7 +115,7 @@ const PlayerSellActions = observer(() => {
   }
   const sell = () => {
     claimCurrency();
-    claimRuby();
+    claimGems();
     claimScore();
     advancePhase();
   };
@@ -167,7 +168,7 @@ const PlayerShopActions = observer(() => {
     )
     : (
     // eslint-disable-next-line react/no-array-index-key
-      <ListItem key={`shopping-cart-${i}`}>{`${c.kind} (${c.value})`}</ListItem>
+      <ListItem key={`shopping-cart-${i}`}>{`${c.kind} ${c.value}★`}</ListItem>
     )));
   return (
     <>

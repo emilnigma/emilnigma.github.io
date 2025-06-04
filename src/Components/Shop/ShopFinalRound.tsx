@@ -9,7 +9,7 @@ const GRID = 6;
 function ShopFinalRound() {
   const player = useStore().getDisplayPlayer();
   const {
-    setStat, rubies, currency, score,
+    setStat, gems, currency, score,
   } = player;
   return (
     <>
@@ -28,13 +28,13 @@ function ShopFinalRound() {
         </Grid>
         <Grid item xs={6} md={4} lg={GRID}>
           <ShopItem
-            name="Rarer than Rubies"
-            description="Exchange two Rubies for one Victory Point."
-            image={mechanics.rubies.excess}
+            name="We are the Gempions"
+            description="Exchange two Gems for one Victory Point."
+            image={mechanics.gems.excess}
             height={280}
             cost={2}
-            costKind="rubies"
-            onClick={() => setStat({ rubies: rubies - 2, score: score + 1 })}
+            costKind="gems"
+            onClick={() => setStat({ gems: gems - 2, score: score + 1 })}
           />
         </Grid>
       </Grid>

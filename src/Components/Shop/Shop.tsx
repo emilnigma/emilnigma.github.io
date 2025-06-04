@@ -14,49 +14,46 @@ function Shop() {
   if (round === settings.rounds) return <ShopFinalRound />;
 
   const {
-    setStat, rubies, startingPosition, effects: { hasDilute = false, fireResistance = 7 },
+    setStat, gems, startingPosition, effects: { hasDilute = false, fireResistance = 7 },
   } = getDisplayPlayer();
   return (
-    <>
-      <Typography variant="h2" textAlign="center">Marketplace</Typography>
-      <Grid container spacing={1}>
-        {Object.keys(ingredients).map((ingredient) => (
-          <Grid item xs={6} md={4} lg={GRID} key={`ingredient-${ingredient}`}>
-            <ShopIngredient ingredient={ingredient as keyof typeof ingredients} />
-          </Grid>
-        ))}
-        <Grid item xs={6} md={4} lg={GRID}>
-          <ShopItem
-            name="Dilution"
-            description="Refill your Dilution Solution. Diluting allows you to return the last Ingredient from your cauldron."
-            image={mechanics.dilute.img}
-            cost={2}
-            costKind="rubies"
-            onClick={() => setStat({ rubies: rubies - 2, effects: { hasDilute: true } })}
-            disabled={hasDilute}
-          />
+    <Grid container spacing={1}>
+      {Object.keys(ingredients).map((ingredient) => (
+        <Grid item xs={6} md={4} lg={GRID} key={`ingredient-${ingredient}`}>
+          <ShopIngredient ingredient={ingredient as keyof typeof ingredients} />
         </Grid>
-        <Grid item xs={6} md={4} lg={GRID}>
-          <ShopItem
-            name="Advantage"
-            description="Permanently move your starting position by one spot. This way you get a head start in the following rounds."
-            cost={2}
-            costKind="rubies"
-            onClick={() => setStat({ rubies: rubies - 2, startingPosition: startingPosition + 1 })}
-          />
-        </Grid>
-        <Grid item xs={6} md={4} lg={GRID}>
-          <ShopItem
-            name="Fire Resistance"
-            description="Permanently reinforce your cauldron thereby increasing your resistance to Fire Lilies by one."
-            image={mechanics.fire_resistance.img}
-            cost={3}
-            costKind="rubies"
-            onClick={() => setStat({ rubies: rubies - 3, effects: { fireResistance: fireResistance + 1 } })}
-          />
-        </Grid>
+      ))}
+      <Grid item xs={6} md={4} lg={GRID}>
+        <ShopItem
+          name="Dilution"
+          description="Refill your Dilution Solution. Diluting allows you to return the last Ingredient from your cauldron."
+          image={mechanics.dilute.img}
+          cost={2}
+          costKind="emerald"
+          onClick={() => setStat({ gems: { ...gems, emerald: gems.emerald - 2 }, effects: { hasDilute: true } })}
+          disabled={hasDilute}
+        />
       </Grid>
-    </>
+      <Grid item xs={6} md={4} lg={GRID}>
+        <ShopItem
+          name="Advantage"
+          description="Permanently move your starting position by one spot. This way you get a head start in the following rounds."
+          cost={2}
+          costKind="emerald"
+          onClick={() => setStat({ gems: { ...gems, emerald: gems.emerald - 2 }, startingPosition: startingPosition + 1 })}
+        />
+      </Grid>
+      <Grid item xs={6} md={4} lg={GRID}>
+        <ShopItem
+          name="Fire Resistance"
+          description="Permanently reinforce your cauldron thereby increasing your resistance to Fire Lilies by one."
+          image={mechanics.fire_resistance.img}
+          cost={3}
+          costKind="emerald"
+          onClick={() => setStat({ gems: { ...gems, emerald: gems.emerald - 3 }, effects: { fireResistance: fireResistance + 1 } })}
+        />
+      </Grid>
+    </Grid>
   );
 }
 

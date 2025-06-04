@@ -2,11 +2,20 @@ import { action, makeObservable, observable } from 'mobx';
 import { IngredientProps } from '../Board/Ingredient';
 import Store from '../../Core/Store';
 import {
-  currencyPointsAt, potionAt, rubyAt, scorePointsAt,
+  goldAt, potionAt, emeraldAt, scorePointsAt,
+  rubyAt,
 } from '../../Assets/BoardPositions';
 import { randomIndex, shuffle } from '../../Core/Random';
 import { PhaseNumber } from '../../Assets/Phases';
 import ingredients from '../../Assets/Ingredients';
+
+export const initialCurrency = {
+  gold: 0,
+  emerald: 1,
+  ruby: 0,
+  sapphire: 0,
+  topaz: 0,
+};
 
 type Effects = Partial<{
   isHaggling: number
@@ -21,15 +30,14 @@ export interface PlayerProps {
   chipsInShoppingCart: (IngredientProps | string)[];
   chipsOnBoard: {position: number, chip: IngredientProps}[];
   phase: PhaseNumber;
+  effects: Effects
 }
 
 export interface PlayerStats {
   startingPosition: number
   score: number
-  currency: number
-  rubies: number
+  currency: typeof initialCurrency
   potion: number
-  effects: Effects
 }
 
 export default class Player implements PlayerProps, PlayerStats {
@@ -46,8 +54,7 @@ export default class Player implements PlayerProps, PlayerStats {
   // stats
   startingPosition: number;
   score: number;
-  currency: number;
-  rubies: number;
+  currency: typeof initialCurrency;
   potion: number;
   effects: Effects;
 
@@ -59,8 +66,7 @@ export default class Player implements PlayerProps, PlayerStats {
     this.chipsInShoppingCart = [];
     this.startingPosition = 0;
     this.score = 1;
-    this.currency = 0;
-    this.rubies = 1;
+    this.currency = initialCurrency;
     this.phase = 1;
     this.potion = 1;
     this.effects = {
@@ -73,9 +79,10 @@ export default class Player implements PlayerProps, PlayerStats {
       startingPosition: observable,
       score: observable,
       currency: observable,
-      rubies: observable,
-      effects: observable,
       setStat: action,
+
+      effects: observable,
+      setProps: action,
 
       phase: observable,
       advancePhase: action,
@@ -91,16 +98,19 @@ export default class Player implements PlayerProps, PlayerStats {
     });
   }
 
+  setProps = (props: Partial<PlayerProps>) => {
+    const { effects } = props;
+    this.effects = { ...this.effects, ...effects };
+  };
+
   setStat = (stats: Partial<PlayerStats>) => {
     const {
-      startingPosition, score, currency, rubies, potion, effects,
+      startingPosition, score, currency, potion,
     } = stats;
     this.startingPosition = startingPosition !== undefined ? startingPosition : this.startingPosition;
     this.score = score ?? this.score;
     this.currency = currency ?? this.currency;
-    this.rubies = rubies ?? this.rubies;
     this.potion = potion ?? this.potion;
-    this.effects = effects !== undefined ? { ...this.effects, ...effects } : this.effects;
   };
 
   getHighestChipOnBoard = () => [...this.chipsOnBoard].sort(({ position: p1 }, { position: p2 }) => p2 - p1);
@@ -111,7 +121,7 @@ export default class Player implements PlayerProps, PlayerStats {
     const [{ position: p1, chip }] = this.getHighestChipOnBoard();
     this.chipsOnBoard = this.chipsOnBoard.filter(({ position: p2 }) => p1 !== p2);
     this.chipsInBag.push(chip);
-    this.setStat({ effects: { hasDilute: false } });
+    this.setProps({ effects: { hasDilute: false } });
   };
 
   pickChip = () => {
@@ -139,22 +149,38 @@ export default class Player implements PlayerProps, PlayerStats {
     this.advancePhase();
   };
 
+  changeCurrency = (currency: Partial<typeof initialCurrency>) => {
+    const merge: typeof initialCurrency = {
+      gold: this.currency.gold + (currency.gold ?? 0),
+      emerald: this.currency.emerald + (currency.emerald ?? 0),
+      ruby: this.currency.ruby + (currency.ruby ?? 0),
+      sapphire: this.currency.sapphire + (currency.sapphire ?? 0),
+      topaz: this.currency.topaz + (currency.topaz ?? 0),
+    };
+    this.setStat({ currency: merge });
+  };
+
   claimScore = () => {
     const [highestChip] = this.getHighestChipOnBoard();
     const position = highestChip.position + 1;
-    this.setStat({ score: this.score + scorePointsAt(position) });
+    this.setStat({
+      score: this.score + scorePointsAt(position),
+    });
   };
 
   claimCurrency = () => {
     const [highestChip] = this.getHighestChipOnBoard();
     const position = highestChip.position + 1;
-    this.setStat({ currency: this.currency + currencyPointsAt(position) });
+    this.changeCurrency({ gold: goldAt(position) });
   };
 
-  claimRuby = () => {
+  claimGems = () => {
     const [highestChip] = this.getHighestChipOnBoard();
     const position = highestChip.position + 1;
-    this.setStat({ rubies: this.rubies + (rubyAt(position) ? 1 : 0) });
+    this.changeCurrency({
+      emerald: emeraldAt(position) ? 1 : 0,
+      ruby: rubyAt(position) ? 1 : 0,
+    });
   };
 
   addToCart = (ingredient: IngredientProps | string) => {
@@ -178,21 +204,20 @@ export default class Player implements PlayerProps, PlayerStats {
     this.phase = 1;
   };
 
-  static fromJSON = (props: PlayerProps & PlayerStats, store: Store): Player => {
-    const {
-      name, character, chipsInBag, chipsInShoppingCart, phase,
-      startingPosition, score, currency, rubies, potion, effects,
-    } = props;
-    const player = new Player(name, character, store);
-    player.chipsInBag = chipsInBag;
-    player.chipsInShoppingCart = chipsInShoppingCart;
-    player.phase = phase;
-    player.startingPosition = startingPosition;
-    player.score = score;
-    player.currency = currency;
-    player.rubies = rubies;
-    player.potion = potion;
-    player.effects = effects;
-    return player;
-  };
+  // static fromJSON = (props: PlayerProps & PlayerStats, store: Store): Player => {
+  //   const {
+  //     name, character, chipsInBag, chipsInShoppingCart, phase,
+  //     startingPosition, score, currency, potion, effects,
+  //   } = props;
+  //   const player = new Player(name, character, store);
+  //   player.chipsInBag = chipsInBag;
+  //   player.chipsInShoppingCart = chipsInShoppingCart;
+  //   player.phase = phase;
+  //   player.startingPosition = startingPosition;
+  //   player.score = score;
+  //   player.currency = currency;
+  //   player.potion = potion;
+  //   player.effects = effects;
+  //   return player;
+  // };
 };

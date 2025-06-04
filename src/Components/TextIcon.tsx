@@ -25,7 +25,7 @@ function TextIcon({
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         textAlign: 'center',
-        textShadow: `0 0 2px ${rgb}`,
+        textShadow: `0 0 5px ${rgb}`,
         alignContent: 'center',
         color: 'white',
         display: 'inline-block',
@@ -49,6 +49,18 @@ export function CurrencyIcon(props: IconProps) {
   return <TextIcon img={mechanics.currency.img} rgb={mechanics.currency.rgb} {...props} />;
 }
 
+export function EmeraldIcon(props: IconProps) {
+  return <TextIcon img={mechanics.emerald.img} rgb={mechanics.emerald.rgb} {...props} />;
+}
+
 export function RubyIcon(props: IconProps) {
-  return <TextIcon img={mechanics.rubies.img} rgb={mechanics.rubies.rgb} {...props} />;
+  return <TextIcon img={mechanics.ruby.img} rgb={mechanics.ruby.rgb} {...props} />;
+}
+
+export function SapphireIcon(props: IconProps) {
+  return <TextIcon img={mechanics.sapphire.img} rgb={mechanics.sapphire.rgb} {...props} />;
+}
+
+export function TopazIcon(props: IconProps) {
+  return <TextIcon img={mechanics.topaz.img} rgb={mechanics.topaz.rgb} {...props} />;
 }

@@ -9,7 +9,9 @@ import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
 import potions from '../../Assets/Potions';
-import TextIcon, { CurrencyIcon, RubyIcon, ScoreIcon } from '../TextIcon';
+import TextIcon, {
+  CurrencyIcon, EmeraldIcon, RubyIcon, SapphireIcon, ScoreIcon, TopazIcon,
+} from '../TextIcon';
 import Player from '../Player/Player';
 
 const maxWidth = '500px';
@@ -24,6 +26,7 @@ function Start() {
     ? JSON.parse(localStorage.getItem('saveGame')!)
     : { round: 0, players: [] };
   const prevPlayers = _prevPlayers as Player[];
+  const prevPlayersString = prevPlayers.map(({ name }) => name).join(', ');
 
   const [newPlayer, setNewPlayer] = useState('');
   const [playerList, setPlayerList] = useState(['Alice', 'Bob']);
@@ -68,7 +71,16 @@ function Start() {
   return (
     <Stack direction="column" spacing={1} sx={{ maxWidth, m: 1 }}>
 
-      <Typography variant="h2" textAlign="center" sx={{ zIndex: 1 }}>Brewery</Typography>
+      <Typography
+        variant="h2"
+        textAlign="center"
+        sx={{
+          textShadow: '0px 3px 3px #0000008a',
+          zIndex: 1,
+        }}
+      >
+        Brewery
+      </Typography>
 
       <div style={{
         width: '100%',
@@ -88,13 +100,13 @@ function Start() {
         Welcome to the Brewery. You can brew various potions by drawing
         <span style={{ whiteSpace: 'nowrap', color: mechanics.cards.rgb }}>
           {' '}
-          <TextIcon img={mechanics.cards.img} rgb={mechanics.cards.rgb} sx={{ width: '1rem', height: '1rem' }} />
+          <TextIcon img={mechanics.cards.img} rgb={mechanics.cards.rgb} sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
           {' Ingredient Cards '}
         </span>
         from your deck. But watch out! If you use more than seven
         <span style={{ whiteSpace: 'nowrap', color: '#c57d54' }}>
           {' '}
-          <TextIcon img={ingredients['Fire Lily'].img} rgb="red" sx={{ width: '1rem', height: '1rem' }} />
+          <TextIcon img={ingredients['Fire Lily'].img} rgb="red" sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
           {' Fire Lilies '}
         </span>
         your cauldron will explode.
@@ -104,19 +116,24 @@ function Start() {
         Selling your potions will earn you
         <span style={{ whiteSpace: 'nowrap', color: mechanics.currency.rgb }}>
           {' '}
-          <CurrencyIcon sx={{ width: '1rem', height: '1rem' }} />
+          <CurrencyIcon sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
           {' Gold '}
         </span>
         and
-        <span style={{ whiteSpace: 'nowrap', color: mechanics.rubies.rgb }}>
+        <span style={{ whiteSpace: 'nowrap', color: mechanics.topaz.rgb }}>
           {' '}
-          <RubyIcon sx={{ width: '1rem', height: '1rem' }} />
-          {' Rubies '}
+          <Stack direction="row" sx={{ display: 'inline-block' }} spacing={-0.6}>
+            <EmeraldIcon sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
+            <RubyIcon sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
+            <SapphireIcon sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
+            <TopazIcon sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
+          </Stack>
+          {' Gems '}
         </span>
         which can be used to buy more powerful ingredients. Your goal is to collect more
         <span style={{ whiteSpace: 'nowrap', color: mechanics.score.rgb }}>
           {' '}
-          <ScoreIcon sx={{ width: '1rem', height: '1rem' }} />
+          <ScoreIcon sx={{ width: '1rem', height: '1rem', mb: '-2px' }} />
           {' Victory Points '}
         </span>
         than your opponents.
@@ -150,7 +167,7 @@ function Start() {
                   <Delete />
                 </Button>
               </ButtonGroup>
-              <Typography variant="caption" textAlign="center">{`Previous Game with ${prevPlayers.map(({ name }) => name).join(', ')} - Round ${prevRound}`}</Typography>
+              <Typography variant="caption" textAlign="center">{`Previous Game with ${prevPlayersString} ~ Round ${prevRound}`}</Typography>
             </>
           )
       }

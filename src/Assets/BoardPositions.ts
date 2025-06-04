@@ -9,21 +9,39 @@ export const scorePointsAt = (i: number) => scorePointIncrements
   .filter((s) => s <= i)
   .reduce((sum) => sum + 1, 0);
 
-// currency
-export const currencyPointIncrements = [
+// gold
+export const goldIncrements = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
   17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51,
   53, 53,
 ];
-export const currencyPointsAt = (i: number) => currencyPointIncrements
+export const goldAt = (i: number) => goldIncrements
   .filter((s) => s <= i)
   .reduce((sum) => sum + 1, 0);
 
-// rubies
+// gem: emerald
+export const emeraldPositions = [
+  5, 9, 13, 16, 20,
+];
+export const emeraldAt = (i: number) => emeraldPositions.includes(i);
+
+// gem: ruby
 export const rubyPositions = [
-  5, 9, 13, 16, 20, 24, 28, 30, 34, 36, 40, 42, 46, 50, 52,
+  24, 28, 30, 34,
 ];
 export const rubyAt = (i: number) => rubyPositions.includes(i);
+
+// gem: sapphire
+export const sapphirePositions = [
+  36, 40, 42,
+];
+export const sapphireAt = (i: number) => sapphirePositions.includes(i);
+
+// gem: topaz
+export const topazPositions = [
+  46, 50, 52,
+];
+export const topazAt = (i: number) => topazPositions.includes(i);
 
 // potions
 export const potionIncrements = [

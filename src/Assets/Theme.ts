@@ -1,4 +1,4 @@
-import { createTheme, withTheme } from '@mui/material';
+import { createTheme } from '@mui/material';
 import mechanics from './Mechanics';
 
 export const sizes = {
@@ -48,7 +48,7 @@ export const theme = createTheme({
           borderWidth: '2px',
           '&:hover': {
             borderWidth: '2px',
-            backgroundImage: 'url("assets/mechanics/button.jpg")',
+            // backgroundImage: 'url("assets/mechanics/button.jpg")',
           },
         },
       },
@@ -58,6 +58,14 @@ export const theme = createTheme({
         root: {
           textTransform: 'none',
           color: 'white',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          color: 'white',
+          backgroundColor: '#222222',
         },
       },
     },

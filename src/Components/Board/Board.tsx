@@ -1,7 +1,10 @@
 import { observer } from 'mobx-react';
 import { Grid } from '@mui/material';
 import {
-  boardPositions, currencyPointsAt, rubyAt, scorePointsAt,
+  boardPositions, goldAt, emeraldAt, scorePointsAt,
+  rubyAt,
+  sapphireAt,
+  topazAt,
 } from '../../Assets/BoardPositions';
 import Spot from './Spot';
 import { useStore } from '../../Core/Store';
@@ -40,20 +43,29 @@ function Board() {
     }
 
     // free spot
-    const currency = currencyPointsAt(positionOnBoard);
     const score = scorePointsAt(positionOnBoard);
-    const hasRuby = rubyAt(positionOnBoard);
     const isHighlight = positionOnBoard === disableUntil + 1;
     return (
       <Grid item xs={6} md={4} lg={GRID} key={`spot-${positionOnBoard}`} sx={{ p: 0 }}>
         <Spot {...{
-          currency, score, hasRuby, disabled, isHighlight,
+          score,
+          currency: {
+            gold: goldAt(positionOnBoard),
+            emerald: emeraldAt(positionOnBoard) ? 1 : 0,
+            ruby: rubyAt(positionOnBoard) ? 1 : 0,
+            sapphire: sapphireAt(positionOnBoard) ? 1 : 0,
+            topaz: topazAt(positionOnBoard) ? 1 : 0,
+          },
+          disabled,
+          isHighlight,
         }}
         />
       </Grid>
     );
   });
-  return <Grid container spacing={1} sx={{ justifyContent: 'center', alignItems: 'center' }}>{boardCmps}</Grid>;
+  return (
+    <Grid container spacing={1} sx={{ justifyContent: 'center', alignItems: 'center' }}>{boardCmps}</Grid>
+  );
 };
 
 export default observer(Board);

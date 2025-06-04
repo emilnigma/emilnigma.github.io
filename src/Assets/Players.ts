@@ -26,6 +26,15 @@ const players = [
   {
     img: 'assets/players/9.jpg',
   },
+  {
+    img: 'assets/players/10.jpg',
+  },
+  {
+    img: 'assets/players/11.jpg',
+  },
+  {
+    img: 'assets/players/12.jpg',
+  },
 ];
 
 export default players;

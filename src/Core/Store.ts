@@ -97,7 +97,7 @@ export default class Store {
 
   scoreRef = createRef();
   currencyRef = createRef();
-  rubyRef = createRef();
+  gemRef = createRef();
 
   constructor() {
     makeObservable(this, {

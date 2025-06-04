@@ -22,7 +22,7 @@ const ingredients: IngredientAsset = {
     description: 'Fire Lilies are volatile and highly flamable. Safely handling them earns you Gold, but using over seven will blow up your cauldron.',
     instantEffect: () => {
       const { player } = effectBase();
-      player.setStat({ currency: player.currency + 1 });
+      player.changeCurrency({ gold: 1 });
     },
   },
   'Humble Carrot': {
@@ -45,7 +45,7 @@ const ingredients: IngredientAsset = {
   'Clover Leaf': {
     img: 'assets/ingredients/clover_leaf.jpg',
     available: [{ value: 1, cost: 4 }, { value: 2, cost: 8 }, { value: 4, cost: 14 }],
-    description: 'If you are lucky and the Clover Leaf is your penultimate or last Ingredient Card you receive an extra ruby.',
+    description: 'If you are lucky and the Clover Leaf is your penultimate or last Ingredient Card you receive an extra gem.',
     condition: () => {
       const { player } = effectBase();
       const highestChips = player.getHighestChipOnBoard();
@@ -55,8 +55,8 @@ const ingredients: IngredientAsset = {
     afterPickEffect: () => {
       const { player } = effectBase();
       const highestChips = player.getHighestChipOnBoard();
-      if (highestChips[0].chip.kind === 'Clover Leaf') player.setStat({ rubies: player.rubies + 1 });
-      if (highestChips.length > 1 && highestChips[1].chip.kind === 'Clover Leaf') player.setStat({ rubies: player.rubies + 1 });
+      if (highestChips[0].chip.kind === 'Clover Leaf') player.changeCurrency({ emerald: 1 });
+      if (highestChips.length > 1 && highestChips[1].chip.kind === 'Clover Leaf') player.changeCurrency({ emerald: 1 });
     },
   },
   'Sliverlake Seaweed': {
@@ -68,7 +68,7 @@ const ingredients: IngredientAsset = {
       const [, ...otherChips] = player.getHighestChipOnBoard();
       const alreadyHasSeaweed = otherChips.some(({ chip }) => chip.kind === 'Sliverlake Seaweed');
       if (player.effects.hasDilute || alreadyHasSeaweed) return;
-      player.setStat({ effects: { hasDilute: true } });
+      player.setProps({ effects: { hasDilute: true } });
     },
   },
   'Golden Fish Scale': {
@@ -78,7 +78,7 @@ const ingredients: IngredientAsset = {
     instantEffect: () => {
       const { player } = effectBase();
       const { isHaggling = 0 } = player.effects;
-      player.setStat({ effects: { isHaggling: isHaggling + 1 } });
+      player.setProps({ effects: { isHaggling: isHaggling + 1 } });
     },
   },
   'Spider Silk': {
