@@ -11,7 +11,7 @@ type IngredientAsset = Record<string, {
 
 const effectBase = () => {
   const store = Store.getInstance();
-  const player = store.getDisplayPlayer();
+  const { player } = store;
   return { store, player };
 };
 

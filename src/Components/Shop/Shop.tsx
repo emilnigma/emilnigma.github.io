@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
 import ShopIngredient from './ShopIngredient';
@@ -10,12 +10,12 @@ import mechanics from '../../Assets/Mechanics';
 const GRID = 12 / 5;
 
 function Shop() {
-  const { getDisplayPlayer, settings, round } = useStore();
+  const { player, settings, round } = useStore();
   if (round === settings.rounds) return <ShopFinalRound />;
 
   const {
-    setStat, gems, startingPosition, effects: { hasDilute = false, fireResistance = 7 },
-  } = getDisplayPlayer();
+    setStat, startingPosition, effects: { hasDilute = false, fireResistance = 7 },
+  } = player;
   return (
     <Grid container spacing={1}>
       {Object.keys(ingredients).map((ingredient) => (

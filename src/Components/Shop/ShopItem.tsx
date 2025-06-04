@@ -19,7 +19,7 @@ type ShopItemProps = {
 function ShopItem({
   name, cost, description, onClick, disabled, image, height = 120,
 }: ShopItemProps) {
-  const player = useStore().getDisplayPlayer();
+  const { player } = useStore();
   const { img, rgb } = mechanics[costKind];
   return (
     <Card sx={{

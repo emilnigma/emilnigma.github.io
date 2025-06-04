@@ -1,10 +1,6 @@
-import { useState } from 'react';
-import {
-  Button, ButtonGroup, Chip, IconButton, Input, Stack, Typography,
-} from '@mui/material';
-import { Add, Delete } from '@mui/icons-material';
+import { Button, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
-import Store, { useStore } from '../../Core/Store';
+import { useStore } from '../../Core/Store';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
@@ -12,55 +8,11 @@ import potions from '../../Assets/Potions';
 import TextIcon, {
   CurrencyIcon, EmeraldIcon, RubyIcon, SapphireIcon, ScoreIcon, TopazIcon,
 } from '../TextIcon';
-import Player from '../Player/Player';
 
 const maxWidth = '500px';
 
 function Start() {
-  const {
-    startGame, settings, setSettings, restoreGame,
-  } = useStore();
-
-  const [hasPrevGame, setHasPrevGame] = useState(Store.readGame());
-  const { round: prevRound, players: _prevPlayers } = hasPrevGame
-    ? JSON.parse(localStorage.getItem('saveGame')!)
-    : { round: 0, players: [] };
-  const prevPlayers = _prevPlayers as Player[];
-  const prevPlayersString = prevPlayers.map(({ name }) => name).join(', ');
-
-  const [newPlayer, setNewPlayer] = useState('');
-  const [playerList, setPlayerList] = useState(['Alice', 'Bob']);
-  const removePlayer = (p1: string) => {
-    const filtered = playerList.filter((p2) => p1 !== p2);
-    setPlayerList([...filtered]);
-  };
-  const addPlayer = () => {
-    setPlayerList([...playerList, newPlayer]);
-    setNewPlayer('');
-  };
-  const addButton = (
-    <IconButton
-      onClick={addPlayer}
-      disabled={newPlayer === '' || playerList.includes(newPlayer)}
-    >
-      <Add color="primary" />
-    </IconButton>
-  );
-  const playerCmps = playerList.map((p) => <Chip label={p} variant="filled" key={`player-${p}`} onDelete={() => removePlayer(p)} />);
-  // const ingredientCmps = Object.entries(ingredients).map(([_key]) => {
-  //   const key = _key as keyof typeof ingredients;
-  //   // TODO
-  //   // const onClick = () => {};
-  //   const value = settings.ingredients.includes(key) ? 1 : 0;
-  //   return (
-  //     <Grid item xs={4} key={`available-${key}-${randomBetween(0, 1000)}`}>
-  //       <Ingredient kind={key} value={value} />
-  //     </Grid>
-  //   );
-  // });
-  // const starterCmps = settings.startDeck.map(({ kind, value }) => (
-  //   <ListItem key={`starter-${kind}-${value}-${randomBetween(0, 1000)}`}>{`${kind} (${value})`}</ListItem>
-  // ));
+  const { startGame } = useStore();
   const allAssets = [
     ...Object.values(ingredients).map(({ img }) => img),
     ...Object.values(mechanics).map(({ img }) => img),
@@ -140,72 +92,12 @@ function Start() {
       </Typography>
 
       <Button
-        onClick={() => startGame(playerList)}
-        disabled={playerList.length < 1}
+        onClick={() => startGame()}
         variant="outlined"
         sx={{ maxWidth }}
       >
-        {hasPrevGame ? 'Start new Game' : 'Start Game'}
+        Start Game
       </Button>
-
-      {
-        !hasPrevGame
-          ? null
-          : (
-            <>
-              <ButtonGroup variant="outlined">
-                <Button
-                  onClick={restoreGame}
-                  fullWidth
-                >
-                  Resume Game
-                </Button>
-                <Button
-                  onClick={() => { Store.clearGame(); setHasPrevGame(false); }}
-                  size="small"
-                >
-                  <Delete />
-                </Button>
-              </ButtonGroup>
-              <Typography variant="caption" textAlign="center">{`Previous Game with ${prevPlayersString} ~ Round ${prevRound}`}</Typography>
-            </>
-          )
-      }
-
-      <div>
-        <Typography variant="h4">Players</Typography>
-        <Input
-          placeholder="New Player"
-          endAdornment={addButton}
-          onChange={(e) => setNewPlayer(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter') addPlayer(); }}
-          value={newPlayer}
-          sx={{ width: '150px' }}
-        />
-        {playerCmps}
-      </div>
-
-      <div>
-        <Typography variant="h4">Rounds</Typography>
-        <Input
-          onChange={({ target: { value } }) => setSettings({ rounds: Number(value) })}
-          value={settings.rounds}
-          type="number"
-          sx={{ width: '150px' }}
-        />
-      </div>
-
-      {/* <div>
-        <Typography variant="h4">Available Ingredients</Typography>
-        <Grid container spacing={1}>
-          {ingredientCmps}
-        </Grid>
-      </div>
-
-      <div>
-        <Typography variant="h4">Starter Ingredients</Typography>
-        <List dense>{starterCmps}</List>
-      </div> */}
 
       <div style={{ height: 0, overflow: 'hidden' }}>
         <Typography variant="h4">Preload Assets</Typography>

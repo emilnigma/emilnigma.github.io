@@ -14,8 +14,8 @@ const GRID = 12 / 5;
 export const GRID_HEIGHT = 80;
 
 function Board() {
-  const { displayPlayer, players } = useStore();
-  const { startingPosition, getChipOnBoard, getHighestChipOnBoard } = players[displayPlayer];
+  const { player } = useStore();
+  const { startingPosition, getChipOnBoard, getHighestChipOnBoard } = player;
   const highestChips = getHighestChipOnBoard();
   const disableUntil = highestChips.length > 0 ? highestChips[0].position : startingPosition;
 

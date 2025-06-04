@@ -3,7 +3,7 @@ import {
   Button, Card, List, ListItem, Stack, Typography,
 } from '@mui/material';
 import { observer } from 'mobx-react';
-import Store, { useStore } from '../../Core/Store';
+import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 import potions from '../../Assets/Potions';
 import { CurrencyIcon, EmeraldIcon, ScoreIcon } from '../TextIcon';
@@ -15,7 +15,7 @@ const PlayerBrewingActions = observer(() => {
   const store = useStore();
   const {
     chipsInBag, chipsOnBoard, pickChip, createPotion, effects: { hasDilute = false, fireResistance = 7 }, dilute,
-  } = store.getDisplayPlayer();
+  } = store.player;
 
   const numberOfWhites = chipsOnBoard
     .filter(({ chip }) => chip.kind === 'Fire Lily')
@@ -66,7 +66,7 @@ const PlayerSellActions = observer(() => {
   const store = useStore();
   const {
     chipsOnBoard, claimGems, claimCurrency, claimScore, advancePhase, potion, effects: { fireResistance = 7 },
-  } = store.getDisplayPlayer();
+  } = store.player;
   const numberOfWhites = chipsOnBoard
     .filter(({ chip }) => chip.kind === 'Fire Lily')
     .reduce((sum, { chip }) => sum + chip.value, 0);
@@ -135,7 +135,7 @@ const PlayerSellActions = observer(() => {
 const PlayerEffectsActions = observer(() => {
   const [claimed, setClaimed] = useState<string[]>([]);
   const store = useStore();
-  const { advancePhase } = store.getDisplayPlayer();
+  const { advancePhase } = store.player;
   const ingredientsWithEffects = Object.entries(ingredients)
     .filter((ing) => ing[1].condition !== undefined && ing[1].afterPickEffect !== undefined);
   const effectCmps = ingredientsWithEffects.map(([name, value]) => (!value.condition!() ? null : (
@@ -160,7 +160,7 @@ const PlayerEffectsActions = observer(() => {
 
 // SHOPPING PHASE
 const PlayerShopActions = observer(() => {
-  const { exitShop, chipsInShoppingCart } = useStore().getDisplayPlayer();
+  const { exitShop, chipsInShoppingCart } = useStore().player;
   const ingredientsCmps = chipsInShoppingCart.map((c, i) => (typeof c === 'string'
     ? (
     // eslint-disable-next-line react/no-array-index-key
@@ -181,46 +181,13 @@ const PlayerShopActions = observer(() => {
 // DONE PHASE
 const PlayerDoneActions = observer(() => {
   const {
-    startNewRound, players, round, setDisplayPlayer, settings,
+    startNewRound, round, settings,
   } = useStore();
-  const allPlayersDone = players.every(({ phase }) => phase === 5);
-  if (!allPlayersDone) {
-    const missingPlayers = players
-      .map(({ name, phase }, i) => {
-        if (phase === 5) return null;
-        return (
-          <Button
-            key={`switch-to-${name}`}
-            fullWidth
-            variant="outlined"
-            onClick={() => setDisplayPlayer(i)}
-          >
-            {`Switch to ${name}`}
-          </Button>
-        );
-      });
-    return (
-      <>
-        <Typography>Waiting for other players:</Typography>
-        {missingPlayers}
-      </>
-    );
-  }
   const isGameOver = round >= settings.rounds;
-  if (isGameOver) Store.clearGame();
-  const rankingCmps = [...players]
-    .sort((p1, p2) => p2.score - p1.score)
-    .map(({ name, score }) => (
-      <ListItem key={`ranking-${name}`}>
-        <ScoreIcon text={score} />
-        <Typography sx={{ ml: 1 }}>{name}</Typography>
-      </ListItem>
-    ));
   const rankingHeader = isGameOver ? 'Winners' : 'Ranking';
   return (
     <>
       <Typography textAlign="center">{rankingHeader}</Typography>
-      <List dense disablePadding>{rankingCmps}</List>
       {
       isGameOver
         ? null
@@ -233,7 +200,7 @@ const PlayerDoneActions = observer(() => {
 
 function PlayerActions() {
   const store = useStore();
-  const { phase } = store.getDisplayPlayer();
+  const { phase } = store.player;
   if (phase === 1) return <PlayerBrewingActions />;
   if (phase === 2) return <PlayerSellActions />;
   if (phase === 3) return <PlayerEffectsActions />;

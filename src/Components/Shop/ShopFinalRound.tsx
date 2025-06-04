@@ -7,7 +7,7 @@ import mechanics from '../../Assets/Mechanics';
 const GRID = 6;
 
 function ShopFinalRound() {
-  const player = useStore().getDisplayPlayer();
+  const { player } = useStore();
   const {
     setStat, gems, currency, score,
   } = player;

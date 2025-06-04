@@ -17,21 +17,9 @@ import potions from '../../Assets/Potions';
 function PlayerInfo() {
   const store = useStore();
   const {
-    name, character, score, currency, phase, potion,
-  } = store.getDisplayPlayer();
+    character, score, currency, phase, potion,
+  } = store.player;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const playerTabs = store.players
-    .filter((p) => p.name !== name)
-    .map((p, i) => (
-      <Button
-      // label={<Typography></Typography>}
-        onClick={() => { store.setDisplayPlayer(i); setAnchorEl(null); }}
-        key={`player-tab-${p.name}`}
-        sx={{ minWidth: '20px', borderBottom: '1px solid rgba(255,255,255,0.2)' }}
-      >
-        <Typography>{`Switch to ${p.name}`}</Typography>
-      </Button>
-    ));
   const { symbol, title } = phases[phase];
   return (
     <Stack
@@ -76,7 +64,6 @@ function PlayerInfo() {
 
       <Stack>
         <Button variant="outlined" onClick={(e) => setAnchorEl(e.currentTarget)}>
-          <Typography>{name}</Typography>
           <FormatListBulletedIcon sx={{ pl: 1 }} />
         </Button>
         <Menu
@@ -86,7 +73,6 @@ function PlayerInfo() {
         >
           <Typography>{`Round ${store.round} of ${store.settings.rounds}`}</Typography>
           <Typography>{`Phase ${symbol}: ${title}`}</Typography>
-          {playerTabs}
         </Menu>
 
         <Stack direction="row">

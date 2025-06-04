@@ -8,6 +8,7 @@ import {
 import { randomIndex, shuffle } from '../../Core/Random';
 import { PhaseNumber } from '../../Assets/Phases';
 import ingredients from '../../Assets/Ingredients';
+import players from '../../Assets/Players';
 
 export const initialCurrency = {
   gold: 0,
@@ -24,7 +25,6 @@ type Effects = Partial<{
 }>;
 
 export interface PlayerProps {
-  name: string;
   character: number;
   chipsInBag: IngredientProps[];
   chipsInShoppingCart: (IngredientProps | string)[];
@@ -42,7 +42,6 @@ export interface PlayerStats {
 
 export default class Player implements PlayerProps, PlayerStats {
   // character
-  name: string;
   character: number;
 
   // game
@@ -58,9 +57,8 @@ export default class Player implements PlayerProps, PlayerStats {
   potion: number;
   effects: Effects;
 
-  constructor(name: string, character: number, store: Store) {
-    this.name = name;
-    this.character = character;
+  constructor(store: Store) {
+    this.character = randomIndex(players);
     this.chipsInBag = shuffle(store.settings.startDeck);
     this.chipsOnBoard = [];
     this.chipsInShoppingCart = [];
@@ -203,21 +201,4 @@ export default class Player implements PlayerProps, PlayerStats {
     this.chipsOnBoard = [];
     this.phase = 1;
   };
-
-  // static fromJSON = (props: PlayerProps & PlayerStats, store: Store): Player => {
-  //   const {
-  //     name, character, chipsInBag, chipsInShoppingCart, phase,
-  //     startingPosition, score, currency, potion, effects,
-  //   } = props;
-  //   const player = new Player(name, character, store);
-  //   player.chipsInBag = chipsInBag;
-  //   player.chipsInShoppingCart = chipsInShoppingCart;
-  //   player.phase = phase;
-  //   player.startingPosition = startingPosition;
-  //   player.score = score;
-  //   player.currency = currency;
-  //   player.potion = potion;
-  //   player.effects = effects;
-  //   return player;
-  // };
 };

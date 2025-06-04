@@ -14,7 +14,7 @@ type ShopItemProps = {
 function ShopIngredient({ ingredient }: ShopItemProps) {
   const {
     addToCart, setStat, currency, effects: { isHaggling = 0 },
-  } = useStore().getDisplayPlayer();
+  } = useStore().player;
   const { available, img, description } = ingredients[ingredient];
   const purchase = (cost: number, value: number) => {
     const effects = isHaggling > 0 ? { isHaggling: isHaggling - 1 } : undefined;
