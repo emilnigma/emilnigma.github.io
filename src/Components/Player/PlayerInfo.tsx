@@ -5,7 +5,6 @@ import { observer } from 'mobx-react';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useState } from 'react';
 import { useStore } from '../../Core/Store';
-import players from '../../Assets/Players';
 
 import {
   CurrencyIcon, EmeraldIcon, RubyIcon, SapphireIcon, ScoreIcon, TopazIcon,
@@ -17,7 +16,7 @@ import potions from '../../Assets/Potions';
 function PlayerInfo() {
   const store = useStore();
   const {
-    character, score, currency, phase, potion,
+    score, currency, phase, potion,
   } = store.player;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { symbol, title } = phases[phase];
@@ -54,7 +53,7 @@ function PlayerInfo() {
             backgroundPosition: 'center',
             backgroundImage: phase === 2
               ? `url("${potions[potion].img}")`
-              : `url("${players[character].img}")`,
+              : `url("${mechanics.cauldron.img}")`,
             backgroundSize: 'cover',
             maskImage: 'radial-gradient(circle at 50%, rgba(0, 0, 0, 1) 52%, transparent 56%)',
           }}

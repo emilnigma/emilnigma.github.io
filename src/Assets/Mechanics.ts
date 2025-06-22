@@ -1,4 +1,9 @@
 const mechanics = {
+  dice: {
+    img: 'assets/mechanics/dice.png',
+    rgb: 'white',
+  },
+  // old
   cauldron: {
     img: 'assets/mechanics/cauldron.jpg',
   },
@@ -62,6 +67,10 @@ const mechanics = {
   dilute: {
     img: 'assets/mechanics/dilute.jpg',
     rgb: 'black',
+  },
+  parchment: {
+    img: 'assets/mechanics/parchment.png',
+    rgb: '#ece6d1',
   },
 };
 

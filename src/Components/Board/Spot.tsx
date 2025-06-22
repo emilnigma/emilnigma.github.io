@@ -9,7 +9,6 @@ import {
 } from '../TextIcon';
 import mechanics from '../../Assets/Mechanics';
 import { GRID_HEIGHT } from './Board';
-import PlayerActions from '../Player/PlayerActions';
 import { initialCurrency } from '../Player/Player';
 
 type SquareProps = {
@@ -68,7 +67,7 @@ function Spot(props: SquareProps) {
         }}
       >
         <Stack direction="row">
-          <PlayerActions />
+          +
         </Stack>
       </Box>
     );
@@ -94,20 +93,7 @@ function Spot(props: SquareProps) {
         transition: '.5s',
       }}
     >
-      <Stack
-        direction="row"
-        spacing={isHighlight ? 1 : -1.7}
-        flexGrow={1}
-        justifyContent="center"
-        alignItems="center"
-      >
-        {scoreCmp}
-        {currencyCmp}
-        {emeraldCmp}
-        {rubyCmp}
-        {sapphireCmp}
-        {topazCmp}
-      </Stack>
+      0
     </Box>
   );
 };

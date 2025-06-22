@@ -2,7 +2,6 @@ import Store from '../Core/Store';
 
 type IngredientAsset = Record<string, {
   img: string
-  available: {value: number, cost: number}[]
   description: string
   instantEffect?: () => void
   condition?: () => boolean
@@ -18,7 +17,6 @@ const effectBase = () => {
 const ingredients: IngredientAsset = {
   'Fire Lily': {
     img: 'assets/ingredients/fire_lily.jpg',
-    available: [],
     description: 'Fire Lilies are volatile and highly flamable. Safely handling them earns you Gold, but using over seven will blow up your cauldron.',
     instantEffect: () => {
       const { player } = effectBase();
@@ -27,12 +25,10 @@ const ingredients: IngredientAsset = {
   },
   'Humble Carrot': {
     img: 'assets/ingredients/carrot.jpg',
-    available: [{ value: 1, cost: 3 }],
     description: 'Carrots are not magic. Together with Mushrooms, however, they can quickly help to brew valuable potions.',
   },
   'Blue Trumpet Mushroom': {
     img: 'assets/ingredients/blue_trumpet_mushrooms.jpg',
-    available: [{ value: 1, cost: 6 }, { value: 2, cost: 10 }, { value: 4, cost: 16 }],
     description: 'Mushrooms move an extra spot if there is a carrot in your cauldron. Two spots if there is three or more carrots.',
     instantEffect: () => {
       const { player } = effectBase();
@@ -44,7 +40,6 @@ const ingredients: IngredientAsset = {
   },
   'Clover Leaf': {
     img: 'assets/ingredients/clover_leaf.jpg',
-    available: [{ value: 1, cost: 4 }, { value: 2, cost: 8 }, { value: 4, cost: 14 }],
     description: 'If you are lucky and the Clover Leaf is your penultimate or last Ingredient Card you receive an extra gem.',
     condition: () => {
       const { player } = effectBase();
@@ -61,7 +56,6 @@ const ingredients: IngredientAsset = {
   },
   'Sliverlake Seaweed': {
     img: 'assets/ingredients/sliverlake_seaweed.jpg',
-    available: [{ value: 1, cost: 5 }, { value: 2, cost: 10 }, { value: 4, cost: 19 }],
     description: 'The seaweed found in Sliverlake holds magical water. The first occurence of seaweed refreshes your Dilution.',
     instantEffect: () => {
       const { player } = effectBase();
@@ -73,7 +67,6 @@ const ingredients: IngredientAsset = {
   },
   'Golden Fish Scale': {
     img: 'assets/ingredients/salmon.jpg',
-    available: [{ value: 1, cost: 8 }, { value: 2, cost: 12 }, { value: 4, cost: 18 }],
     description: 'Shiny scales help you haggle with other merchants. Per scale you receive 30% off your next purchase.',
     instantEffect: () => {
       const { player } = effectBase();
@@ -83,12 +76,10 @@ const ingredients: IngredientAsset = {
   },
   'Spider Silk': {
     img: 'assets/ingredients/spider_silk.jpg',
-    available: [{ value: 1, cost: 9 }],
     description: 'Spider Silk has no effect (yet)',
   },
   'Winter Moth': {
     img: 'assets/ingredients/winter_moth.jpg',
-    available: [{ value: 1, cost: 10 }],
     description: 'Winter Moths has no effect (yet)',
   },
 };

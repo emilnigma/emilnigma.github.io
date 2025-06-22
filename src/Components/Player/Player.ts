@@ -59,7 +59,7 @@ export default class Player implements PlayerProps, PlayerStats {
 
   constructor(store: Store) {
     this.character = randomIndex(players);
-    this.chipsInBag = shuffle(store.settings.startDeck);
+    this.chipsInBag = []; // shuffle(store.settings.startDeck);
     this.chipsOnBoard = [];
     this.chipsInShoppingCart = [];
     this.startingPosition = 0;
@@ -129,11 +129,11 @@ export default class Player implements PlayerProps, PlayerStats {
     this.chipsInBag = [...this.chipsInBag.slice(0, index), ...this.chipsInBag.slice(index + 1)];
 
     const [prevChip] = this.getHighestChipOnBoard();
-    const position = prevChip ? prevChip.position : this.startingPosition;
+    const position = prevChip ? prevChip.position : -1;
     if (position >= 52) {
       this.createPotion();
     } else {
-      this.chipsOnBoard.push({ position: position + chip.value, chip });
+      this.chipsOnBoard.push({ position: position + 1, chip });
     }
 
     const { instantEffect } = ingredients[chip.kind];

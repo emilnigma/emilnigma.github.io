@@ -1,5 +1,5 @@
 // all positions
-export const boardPositions = Array.from(new Array(54), (_, i) => i);
+export const boardPositions = Array.from(new Array(12), (_, i) => i);
 
 // score
 export const scorePointIncrements = [

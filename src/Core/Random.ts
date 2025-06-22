@@ -5,3 +5,4 @@ export const shuffle = (unshuffled: any[]) => [...unshuffled]
   .map((value) => ({ value, sort: Math.random() }))
   .sort((a, b) => a.sort - b.sort)
   .map(({ value }) => value);
+export const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
