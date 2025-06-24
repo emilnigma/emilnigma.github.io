@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 import { action, makeObservable, observable } from 'mobx';
 import { createContext, createRef, useContext } from 'react';
-import Player from '../Components/Player/Player';
 import ingredients from '../Assets/Ingredients';
 import { IngredientProps } from '../Components/Board/Ingredient';
 import { clamp, randomBetween } from './Random';
@@ -29,8 +28,6 @@ export default class Store {
   pageSet = (page: Page) => {
     this.page = page;
   };
-
-  public player: Player = new Player(this);
 
   level = 1;
   levelSet = (level: number) => {
