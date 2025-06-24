@@ -1,11 +1,13 @@
 import { observer } from 'mobx-react';
 import {
-  Box, Chip, Collapse, IconButton, Stack, Typography,
+  Box, Collapse, IconButton, Stack, Typography,
 } from '@mui/material';
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useStore } from '../../Core/Store';
+import mechanics from '../../Assets/Mechanics';
 
-const capacityColor = 'goldenrod';
+const capacityColor = mechanics.phase.rgb;
 
 function Capacity() {
   const {
@@ -17,13 +19,26 @@ function Capacity() {
       <Stack direction="row">
         <Typography variant="h5" flexGrow={1}>Volume</Typography>
         <IconButton onClick={() => tooltipSet(tooltip === 'capacity' ? 'none' : 'capacity')}>
-          <HelpOutlineIcon htmlColor={tooltip === 'capacity' ? capacityColor : 'white'} />
+          {tooltip === 'capacity'
+            ? <RemoveCircleOutlineOutlinedIcon htmlColor="white" />
+            : <HelpOutlineIcon htmlColor="white" />}
         </IconButton>
       </Stack>
+      <Collapse in={tooltip === 'capacity'}>
+        <ul style={{ margin: 1 }}>
+          <li>{`Ingredients currently in cauldron: ${capacity}`}</li>
+          <li>{`Maximum Capacity: ${capacityMax}`}</li>
+        </ul>
+        <Typography sx={{ mb: 1 }}>
+          If the volume in the cauldron reaches its
+          <Typography color={capacityColor} component="span">{' maximum capacity '}</Typography>
+          you need to sell your potion or start over. Naturally, a larger volume is of greater value.
+        </Typography>
+      </Collapse>
       <span style={{
         width: '100%',
         height: '15px',
-        backgroundColor: 'rgba(0,0,0,0.2)',
+        backgroundColor: '#333',
         position: 'relative',
         overflow: 'hidden',
         display: 'block',
@@ -58,24 +73,6 @@ function Capacity() {
         }}
         />
       </span>
-      <Collapse in={tooltip === 'capacity'}>
-        <ul style={{ margin: 1 }}>
-          <li>{`Ingredients currently in cauldron: ${capacity}`}</li>
-          <li>{`Maximum Capacity: ${capacityMax}`}</li>
-        </ul>
-        <Typography>
-          If the volume in the cauldron reaches its
-          <Typography color={capacityColor} component="span">{' maximum capacity '}</Typography>
-          you need to sell your potion or start over. Naturally, a larger volume is of greater value.
-          <Chip
-            clickable
-            onClick={() => tooltipSet('none')}
-            label="OK"
-            size="small"
-            sx={{ ml: 1, color: capacityColor, border: `1px solid ${capacityColor}` }}
-          />
-        </Typography>
-      </Collapse>
     </Box>
   );
 }

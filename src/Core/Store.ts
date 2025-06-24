@@ -4,8 +4,8 @@ import { createContext, createRef, useContext } from 'react';
 import Player from '../Components/Player/Player';
 import ingredients from '../Assets/Ingredients';
 import { IngredientProps } from '../Components/Board/Ingredient';
-import UiStore from './UiStore';
 import { clamp, randomBetween } from './Random';
+import { Page } from '../Components/Main/Game';
 
 export type Settings = {
   rounds: number,
@@ -25,7 +25,10 @@ export default class Store {
     return this.instance;
   };
 
-  ui = new UiStore();
+  page: Page = 'brew';
+  pageSet = (page: Page) => {
+    this.page = page;
+  };
 
   public player: Player = new Player(this);
 
@@ -97,6 +100,9 @@ export default class Store {
 
   constructor() {
     makeObservable(this, {
+      page: observable,
+      pageSet: action,
+
       level: observable,
       levelSet: action,
 

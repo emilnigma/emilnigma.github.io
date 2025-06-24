@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { Button, Collapse, Stack } from '@mui/material';
+import { Button, Collapse } from '@mui/material';
 import { useState } from 'react';
 import { useStore } from '../../Core/Store';
 import Rolls from './Rolls';
@@ -11,13 +11,13 @@ export const GRID_HEIGHT = 80;
 
 function Brew() {
   const {
+    pageSet,
     level,
     tooltipSet,
     progress, progressMax,
     capacity, capacityMax, capacitySet, capacityIsVisible,
     stability, stabilityLeftBound, stabilityRightBound, stabilitySet, stabilityIsVisible,
     quality,
-    addIngredient,
   } = useStore();
   const [introducedProgress, setIntroducedProgress] = useState(false);
   const [introducedCapacity, setIntroducedCapacity] = useState(false);
@@ -48,7 +48,7 @@ function Brew() {
   }
 
   return (
-    <Stack direction="column" spacing={1} sx={{ m: 1 }}>
+    <>
       <Rolls />
       <Progress />
       {isTutorial ? <Collapse in={capacityIsVisible()}><Capacity /></Collapse> : <Capacity />}
@@ -56,11 +56,11 @@ function Brew() {
 
       <br />
 
-      <Button variant="outlined" onClick={addIngredient} disabled={!isStable || isFull}>Add Ingredient</Button>
+      <Button variant="outlined" onClick={() => pageSet('ingredients')} disabled={!isStable || isFull}>Add Ingredient</Button>
       {progress < progressMax
         ? null
         : <Button variant="outlined" onClick={() => {}}>{`Sell for ${qualityString}`}</Button>}
-    </Stack>
+    </>
   );
 };
 
