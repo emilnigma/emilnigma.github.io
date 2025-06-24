@@ -1,6 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
 import { IngredientProps } from '../Board/Ingredient';
-import Store from '../../Core/Store';
 import {
   goldAt, potionAt, emeraldAt, scorePointsAt,
   rubyAt,
@@ -57,7 +56,7 @@ export default class Player implements PlayerProps, PlayerStats {
   potion: number;
   effects: Effects;
 
-  constructor(store: Store) {
+  constructor() {
     this.character = randomIndex(players);
     this.chipsInBag = []; // shuffle(store.settings.startDeck);
     this.chipsOnBoard = [];

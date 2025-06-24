@@ -70,7 +70,7 @@ function PlayerInfo() {
           open={anchorEl !== null}
           onClose={() => setAnchorEl(null)}
         >
-          <Typography>{`Round ${store.round} of ${store.settings.rounds}`}</Typography>
+          {/* <Typography>{`Round ${store.round} of ${store.settings.rounds}`}</Typography> */}
           <Typography>{`Phase ${symbol}: ${title}`}</Typography>
         </Menu>
 

@@ -1,6 +1,5 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
-import { useStore } from '../../Core/Store';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
@@ -12,7 +11,6 @@ import TextIcon, {
 const maxWidth = '500px';
 
 function Start() {
-  const { startGame } = useStore();
   const allAssets = [
     ...Object.values(ingredients).map(({ img }) => img),
     ...Object.values(mechanics).map(({ img }) => img),
@@ -92,7 +90,7 @@ function Start() {
       </Typography>
 
       <Button
-        onClick={() => startGame()}
+        // onClick={() => startGame()}
         variant="outlined"
         sx={{ maxWidth }}
       >
