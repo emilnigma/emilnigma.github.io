@@ -1,16 +1,8 @@
 /* eslint-disable no-use-before-define */
 import { action, makeObservable, observable } from 'mobx';
 import { createContext, createRef, useContext } from 'react';
-import ingredients from '../Assets/Ingredients';
-import { IngredientProps } from '../Components/Board/Ingredient';
 import { clamp, randomBetween } from './Random';
 import { Page } from '../Components/Main/Game';
-
-export type Settings = {
-  rounds: number,
-  ingredients: (keyof typeof ingredients)[]
-  startDeck: IngredientProps[]
-};
 
 export type Tooltip = 'none' | 'progress' | 'capacity' | 'stability';
 
