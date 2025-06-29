@@ -11,7 +11,7 @@ export type TextIconProps = {
     large?: boolean
     small?: boolean
     sx?: any
-    ref: Ref<HTMLElement>
+    ref?: Ref<HTMLElement>
 };
 
 function TextIcon({

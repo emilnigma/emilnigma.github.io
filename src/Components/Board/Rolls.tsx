@@ -1,8 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
-import Juice from '../../Core/Juice';
-import TextIcon from '../TextIcon';
 import Portrait from './Portrait';
 
 const sx = {
