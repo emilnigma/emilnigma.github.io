@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Typography } from '@mui/material';
+import { Ref } from 'react';
 import { sizes } from '../Assets/Theme';
 import mechanics from '../Assets/Mechanics';
 
@@ -10,10 +11,11 @@ export type TextIconProps = {
     large?: boolean
     small?: boolean
     sx?: any
+    ref: Ref<HTMLElement>
 };
 
 function TextIcon({
-  img, rgb, text = '', large = false, small = false, sx,
+  img, rgb, text = '', large = false, small = false, sx, ref,
 }: TextIconProps) {
   const variant = large ? 'h5' : 'body1';
   return (
@@ -32,7 +34,7 @@ function TextIcon({
         ...sx,
       }}
     >
-      <Typography variant={variant} fontFamily="PT Serif">{text}</Typography>
+      <Typography ref={ref} variant={variant} fontFamily="PT Serif">{text}</Typography>
     </Box>
   );
 }

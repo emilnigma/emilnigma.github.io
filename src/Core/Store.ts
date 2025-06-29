@@ -3,6 +3,7 @@ import { action, makeObservable, observable } from 'mobx';
 import { createContext, createRef, useContext } from 'react';
 import { clamp, randomBetween } from './Random';
 import { Page } from '../Components/Main/Game';
+import { juice } from './Juice';
 
 export type Tooltip = 'none' | 'progress' | 'capacity' | 'stability';
 
@@ -42,6 +43,7 @@ export default class Store {
   rollRightMax = 6;
   rollSet = () => {
     this.rollLeft = randomBetween(1, this.rollLeftMax);
+    juice('rollLeft', 'testJuice');
     this.rollRight = randomBetween(1, this.rollRightMax);
     return [this.rollLeft, this.rollRight];
   };

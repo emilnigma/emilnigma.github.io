@@ -1,6 +1,9 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
+import Juice from '../../Core/Juice';
+import TextIcon from '../TextIcon';
+import Portrait from './Portrait';
 
 const sx = {
   borderRadius: '8px',
@@ -13,21 +16,20 @@ function Rolls() {
 
   return (
     <Stack direction="row" sx={{ borderWidth: '2px', borderStyle: 'solid', borderImage: 'linear-gradient(to right, transparent, #333, transparent) 1 0 1 0' }}>
-      <Box flexGrow={1} sx={{ ...sx, width: '30%' }}>
+      <Box flexGrow={1} sx={{ ...sx, width: '30%', justifyItems: 'right' }}>
         <Typography textAlign="right">{ rollTheme[0] }</Typography>
-        <Typography textAlign="right" variant="h3">
-          { rollLeft === 0 && rollRight === 0 ? '?' : rollLeft}
-        </Typography>
+        <Portrait img="assets/dice/light.jpg" text={rollLeft === 0 && rollRight === 0 ? '' : `${rollLeft}`} />
         <Typography textAlign="right">Roll between 1 and 6</Typography>
       </Box>
-      <Box sx={{ ...sx, width: '45px', pt: '1.4em' }}>
+      <Box sx={{
+        ...sx, width: '45px', pt: '100px', ml: -1, mr: -1,
+      }}
+      >
         <Typography variant="h3">{sign}</Typography>
       </Box>
       <Box flexGrow={1} sx={{ ...sx, width: '30%' }}>
         <Typography textAlign="left">{ rollTheme[1] }</Typography>
-        <Typography textAlign="left" variant="h3">
-          { rollLeft === 0 && rollRight === 0 ? '?' : rollRight}
-        </Typography>
+        <Portrait img="assets/dice/shadow.jpg" text={rollLeft === 0 && rollRight === 0 ? '' : `${rollRight}`} />
         <Typography textAlign="left">Roll between 1 and 6</Typography>
       </Box>
     </Stack>
