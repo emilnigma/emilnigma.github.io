@@ -27,7 +27,14 @@ function Portrait({
         alignContent: 'center',
       }}
       >
-        <Typography ref={refe} variant="h2" sx={{ textShadow: '0px 3px 3px #0000008a' }}>{text}</Typography>
+        <Typography
+          ref={refe}
+          variant="h2"
+          fontFamily="PT Serif"
+          sx={{ textShadow: '0px 3px 3px #0000008a' }}
+        >
+          {text}
+        </Typography>
       </div>
     );
   }

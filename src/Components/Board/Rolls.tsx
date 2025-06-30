@@ -53,7 +53,13 @@ function Rolls() {
       </Box>
       <Box sx={{ ...sx, width: '45px' }}>
         <Typography>vs</Typography>
-        <Typography variant="h2" sx={{ height: '200px', alignContent: 'center' }}>{sign}</Typography>
+        <Typography
+          variant="h2"
+          fontFamily="PT Serif"
+          sx={{ height: '200px', alignContent: 'center' }}
+        >
+          {sign}
+        </Typography>
       </Box>
       <Box flexGrow={1} sx={{ ...sx, width: '30%' }}>
         <Stack direction="row">

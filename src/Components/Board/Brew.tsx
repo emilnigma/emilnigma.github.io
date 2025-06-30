@@ -14,7 +14,6 @@ function Brew() {
     pageSet,
     level,
     tooltipSet,
-    rollSet,
     progress, progressMax,
     capacity, capacityMax, capacitySet, capacityIsVisible,
     stability, stabilityLeftBound, stabilityRightBound, stabilitySet, stabilityIsVisible,
@@ -57,7 +56,7 @@ function Brew() {
 
       <br />
 
-      <Button variant="outlined" onClick={() => rollSet()}>Roll</Button>
+      <Button variant="outlined">Roll</Button>
       <Button variant="outlined" onClick={() => pageSet('ingredients')} disabled={!isStable || isFull}>Add Ingredient</Button>
       {progress < progressMax
         ? null
