@@ -119,8 +119,8 @@
 
 @keyframes bounce {
   50% {
-    color: red;
-    font-size: 4rem;
+    font-size: 7rem;
+    text-shadow: 6px 6px 3px #0000008a
   }
 }
 .testJuice {

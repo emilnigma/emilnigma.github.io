@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import { action, makeObservable, observable } from 'mobx';
 import { createContext, createRef, useContext } from 'react';
-import { clamp, randomBetween } from './Random';
+import { clamp } from './Random';
 import { Page } from '../Components/Main/Game';
 import { juice } from './Juice';
 
@@ -37,15 +37,22 @@ export default class Store {
   gemRef = createRef();
 
   rollTheme = ['Light', 'Shadow'];
-  rollLeft = 0;
+  rollLeft: number | undefined = undefined;
   rollLeftMax = 6;
-  rollRight = 0;
+  rollRight: number | undefined = undefined;
   rollRightMax = 6;
-  rollSet = () => {
-    this.rollLeft = randomBetween(1, this.rollLeftMax);
+  rollSet = ([rollLeft, rollRight]: (number | undefined)[]) => {
+    // this.rollLeft = randomBetween(1, this.rollLeftMax);
+    // this.rollRight = randomBetween(1, this.rollRightMax);
+    // return [this.rollLeft, this.rollRight];
+    this.rollLeft = rollLeft;
+    this.rollRight = rollRight;
     juice('rollLeft', 'testJuice');
-    this.rollRight = randomBetween(1, this.rollRightMax);
-    return [this.rollLeft, this.rollRight];
+    juice('rollRight', 'testJuice');
+  };
+  rollReset = () => {
+    this.rollLeft = undefined;
+    this.rollRight = undefined;
   };
 
   progress = 0;
@@ -82,10 +89,10 @@ export default class Store {
   };
 
   addIngredient = () => {
-    const [l, r] = this.rollSet();
-    if (l >= r) this.progressSet(this.progress + 1);
-    if (this.capacityIsVisible()) this.capacitySet(this.capacity + 1);
-    if (this.stabilityIsVisible()) this.stabilitySet(this.stability + l - r);
+    // const [l, r] = this.rollSet();
+    // if (l >= r) this.progressSet(this.progress + 1);
+    // if (this.capacityIsVisible()) this.capacitySet(this.capacity + 1);
+    // if (this.stabilityIsVisible()) this.stabilitySet(this.stability + l - r);
     this.qualitySet();
   };
 
@@ -103,6 +110,7 @@ export default class Store {
       rollLeft: observable,
       rollRight: observable,
       rollSet: action,
+      rollReset: action,
 
       progress: observable,
       progressSet: action,

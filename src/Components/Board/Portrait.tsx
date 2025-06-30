@@ -6,11 +6,11 @@ export type PortraitProps = {
     img: string
     frame?: boolean
     text?: string
-    ref?: RefObject<HTMLElement>
+    refe?: RefObject<HTMLElement>
 };
 
 function Portrait({
-  img, frame = false, text = '', ref,
+  img, frame = false, text = '', refe,
 }: PortraitProps) {
   if (!frame) {
     return (
@@ -27,7 +27,7 @@ function Portrait({
         alignContent: 'center',
       }}
       >
-        <Typography ref={ref} variant="h2" sx={{ textShadow: '0px 3px 3px #0000008a' }}>{text}</Typography>
+        <Typography ref={refe} variant="h2" sx={{ textShadow: '0px 3px 3px #0000008a' }}>{text}</Typography>
       </div>
     );
   }

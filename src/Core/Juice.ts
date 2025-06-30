@@ -1,7 +1,8 @@
 import { createRef } from 'react';
 
 const Juice = {
-  rollLeft: createRef<HTMLSpanElement>(),
+  rollLeft: createRef<HTMLElement>(),
+  rollRight: createRef<HTMLElement>(),
 };
 export default Juice;
 
