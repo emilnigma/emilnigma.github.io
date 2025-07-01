@@ -1,9 +1,10 @@
 /* eslint-disable no-use-before-define */
 import { action, makeObservable, observable } from 'mobx';
 import { createContext, createRef, useContext } from 'react';
-import { clamp } from './Random';
+import { clamp, randomBetween } from './Random';
 import { Page } from '../Components/Main/Game';
 import { juice } from './Juice';
+import { DiceKey } from '../Assets/Dice';
 
 export type Tooltip = 'none' | 'progress' | 'capacity' | 'stability';
 
@@ -36,7 +37,8 @@ export default class Store {
   currencyRef = createRef();
   gemRef = createRef();
 
-  rollTheme = ['Light', 'Shadow'];
+  rollTheme: DiceKey[] = ['Fire', 'Frost'];
+  rollValue: (number | undefined)[] = [undefined, undefined];
   rollLeft: number | undefined = undefined;
   rollLeftMax = 6;
   rollRight: number | undefined = undefined;
@@ -47,12 +49,32 @@ export default class Store {
     // return [this.rollLeft, this.rollRight];
     this.rollLeft = rollLeft;
     this.rollRight = rollRight;
-    juice('rollLeft', 'testJuice');
-    juice('rollRight', 'testJuice');
   };
   rollReset = () => {
     this.rollLeft = undefined;
     this.rollRight = undefined;
+  };
+  startAnim = () => {
+    this.rollReset();
+    let speed = -150;
+    let anim = 0;
+    const frame = () => {
+      anim = setTimeout(() => {
+        this.rollSet([randomBetween(1, 6), randomBetween(1, 6)]);
+        speed += 10;
+        frame();
+      }, Math.max(15, Math.abs(speed)));
+    };
+    frame();
+    setTimeout(() => {
+      clearTimeout(anim);
+      juice('rollLeft', 'testJuice');
+      juice('rollRight', 'testJuice');
+      if (this.rollLeft !== undefined && this.rollRight !== undefined && this.rollLeft >= this.rollRight) this.progressSet(this.progress + 1);
+      if (this.capacityIsVisible()) this.capacitySet(this.capacity + 1);
+      if (this.stabilityIsVisible()) this.stabilitySet(this.stability + (this.rollLeft ?? 0) - (this.rollRight ?? 0));
+      this.qualitySet();
+    }, 5000);
   };
 
   progress = 0;

@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import { useStore } from '../../Core/Store';
 
 function Ingredients() {
-  const { pageSet } = useStore();
+  const { pageSet, startAnim } = useStore();
   return (
     <>
       <Typography textAlign="center" variant="h3">Add Ingredient</Typography>
@@ -17,7 +17,7 @@ function Ingredients() {
           ing3
         </Grid>
       </Grid>
-      <Button variant="outlined" onClick={() => pageSet('brew')}>Back</Button>
+      <Button variant="outlined" onClick={() => { pageSet('brew'); startAnim(); }}>Back</Button>
     </>
   );
 }

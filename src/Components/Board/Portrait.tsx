@@ -15,8 +15,8 @@ function Portrait({
   if (!frame) {
     return (
       <div style={{
-        width: 200,
-        height: 200,
+        width: 160,
+        height: 160,
         backgroundPosition: 'center',
         backgroundImage: `url("${img}")`,
         backgroundSize: 'cover',

@@ -56,8 +56,9 @@ function Brew() {
 
       <br />
 
-      <Button variant="outlined">Roll</Button>
-      <Button variant="outlined" onClick={() => pageSet('ingredients')} disabled={!isStable || isFull}>Add Ingredient</Button>
+      <Button variant="outlined" onClick={() => pageSet('ingredients')} disabled={!isStable || isFull}>
+        Add Ingredient
+      </Button>
       {progress < progressMax
         ? null
         : <Button variant="outlined" onClick={() => {}}>{`Sell for ${qualityString}`}</Button>}
