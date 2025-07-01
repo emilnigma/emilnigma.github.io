@@ -16,8 +16,8 @@ function Brew() {
     level,
     tooltipSet,
     progress, progressMax,
-    capacity, capacityMax, capacitySet, capacityIsVisible,
-    stability, stabilityLeftBound, stabilityRightBound, stabilitySet, stabilityIsVisible,
+    capacity, capacityMax, capacityIsVisible,
+    stability, stabilityLeftBound, stabilityRightBound, stabilityIsVisible,
     quality,
   } = useStore();
   const [introducedProgress, setIntroducedProgress] = useState(false);
@@ -37,13 +37,11 @@ function Brew() {
   }
 
   if (capacityIsVisible() && !introducedCapacity) {
-    capacitySet(2);
     tooltipSet('capacity');
     setIntroducedCapacity(true);
   }
 
   if (stabilityIsVisible() && !introducedStability) {
-    stabilitySet(0);
     tooltipSet('stability');
     setIntroducedStability(true);
   }

@@ -108,7 +108,7 @@ function Start() {
 
       {levels}
 
-      <div style={{ /* height: 0, */ overflow: 'hidden' }}>
+      <div style={{ height: 0, overflow: 'hidden' }}>
         <Typography variant="h4">Preload Assets</Typography>
         {assetCmps}
       </div>

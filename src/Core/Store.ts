@@ -34,6 +34,7 @@ export default class Store {
     }
     this.page = 'brew';
     this.level = level as LevelKey;
+    this.tooltip = level === tutorialLevel ? 'progress' : 'none';
     this.rollTheme = Levels[level as LevelKey].theme as DiceKey[];
     this.progress = 0;
     this.capacity = 0;
@@ -94,8 +95,9 @@ export default class Store {
 
   capacity = 0;
   capacityMax = 9;
-  capacityIsVisible = () => this.level !== tutorialLevel || this.progress > 1;
+  capacityIsVisible = () => this.level !== tutorialLevel || this.progress > 0;
   capacitySet = (capacity: number) => {
+    if (!this.capacityIsVisible()) return;
     this.capacity = clamp(capacity, 0, this.capacityMax);
   };
 
@@ -104,8 +106,9 @@ export default class Store {
   stabilityLeftBound = 8;
   stabilityRightMax = -10;
   stabilityLeftMax = 10;
-  stabilityIsVisible = () => this.level !== tutorialLevel || (this.progress > 1 && this.capacity > 3);
+  stabilityIsVisible = () => this.level !== tutorialLevel || this.progress > 1;
   stabilitySet = (stability: number) => {
+    if (!this.stabilityIsVisible()) return;
     this.stability = clamp(stability, this.stabilityRightMax, this.stabilityLeftMax);
   };
 
