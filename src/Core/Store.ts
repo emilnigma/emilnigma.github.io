@@ -5,8 +5,11 @@ import { clamp, randomBetween } from './Random';
 import { Page } from '../Components/Main/Game';
 import { juice } from './Juice';
 import { DiceKey } from '../Assets/Dice';
+import Levels, { LevelKey } from '../Assets/Levels';
 
 export type Tooltip = 'none' | 'progress' | 'capacity' | 'stability';
+
+const [tutorialLevel] = Object.keys(Levels);
 
 export default class Store {
   // Singleton
@@ -18,14 +21,23 @@ export default class Store {
     return this.instance;
   };
 
-  page: Page = 'brew';
+  page: Page = 'start';
   pageSet = (page: Page) => {
     this.page = page;
   };
 
-  level = 1;
-  levelSet = (level: number) => {
-    this.level = level;
+  level: LevelKey | undefined = undefined;
+  levelSet = (level: string) => {
+    if (!Object.keys(Levels).includes(level)) {
+      console.error(`${level} is not a valid level.`);
+      return;
+    }
+    this.page = 'brew';
+    this.level = level as LevelKey;
+    this.rollTheme = Levels[level as LevelKey].theme as DiceKey[];
+    this.progress = 0;
+    this.capacity = 0;
+    this.stability = 0;
   };
 
   tooltip = 'progress';
@@ -44,9 +56,6 @@ export default class Store {
   rollRight: number | undefined = undefined;
   rollRightMax = 6;
   rollSet = ([rollLeft, rollRight]: (number | undefined)[]) => {
-    // this.rollLeft = randomBetween(1, this.rollLeftMax);
-    // this.rollRight = randomBetween(1, this.rollRightMax);
-    // return [this.rollLeft, this.rollRight];
     this.rollLeft = rollLeft;
     this.rollRight = rollRight;
   };
@@ -85,7 +94,7 @@ export default class Store {
 
   capacity = 0;
   capacityMax = 9;
-  capacityIsVisible = () => this.level !== 1 || this.progress > 1;
+  capacityIsVisible = () => this.level !== tutorialLevel || this.progress > 1;
   capacitySet = (capacity: number) => {
     this.capacity = clamp(capacity, 0, this.capacityMax);
   };
@@ -95,7 +104,7 @@ export default class Store {
   stabilityLeftBound = 8;
   stabilityRightMax = -10;
   stabilityLeftMax = 10;
-  stabilityIsVisible = () => this.level !== 1 || (this.progress > 1 && this.capacity > 3);
+  stabilityIsVisible = () => this.level !== tutorialLevel || (this.progress > 1 && this.capacity > 3);
   stabilitySet = (stability: number) => {
     this.stability = clamp(stability, this.stabilityRightMax, this.stabilityLeftMax);
   };

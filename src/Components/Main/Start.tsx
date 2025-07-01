@@ -7,11 +7,28 @@ import potions from '../../Assets/Potions';
 import TextIcon, {
   CurrencyIcon, EmeraldIcon, RubyIcon, SapphireIcon, ScoreIcon, TopazIcon,
 } from '../TextIcon';
+import Levels from '../../Assets/Levels';
+import { useStore } from '../../Core/Store';
+import Dice from '../../Assets/Dice';
 
 const maxWidth = '500px';
 
 function Start() {
+  const { levelSet } = useStore();
+  const levels = Object.keys(Levels).map((title) => {
+    const onClick = () => levelSet(title);
+    return (
+      <Button
+        variant="outlined"
+        onClick={onClick}
+        key={`start-level-${title}`}
+      >
+        {`${title}`}
+      </Button>
+    );
+  });
   const allAssets = [
+    ...Object.values(Dice).map(({ img }) => img),
     ...Object.values(ingredients).map(({ img }) => img),
     ...Object.values(mechanics).map(({ img }) => img),
     ...Object.values(players).map(({ img }) => img),
@@ -89,13 +106,7 @@ function Start() {
         than your opponents.
       </Typography>
 
-      <Button
-        // onClick={() => startGame()}
-        variant="outlined"
-        sx={{ maxWidth }}
-      >
-        Start Game
-      </Button>
+      {levels}
 
       <div style={{ height: 0, overflow: 'hidden' }}>
         <Typography variant="h4">Preload Assets</Typography>

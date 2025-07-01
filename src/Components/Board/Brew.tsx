@@ -6,6 +6,7 @@ import Rolls from './Rolls';
 import Progress from '../Bars/Progress';
 import Capacity from '../Bars/Capacity';
 import Stability from '../Bars/Stability';
+import Levels from '../../Assets/Levels';
 
 export const GRID_HEIGHT = 80;
 
@@ -25,7 +26,7 @@ function Brew() {
 
   const isFull = capacity >= capacityMax;
   const isStable = stability <= stabilityLeftBound && stability >= stabilityRightBound;
-  const isTutorial = level === 1;
+  const isTutorial = level === Object.keys(Levels)[0];
 
   const [gold, silver, copper] = quality;
   const qualityString = `${gold > 0 ? `${gold} G ` : ''}${gold > 0 || silver > 0 ? `${silver} S ` : ''}${`${copper} C`}`;
