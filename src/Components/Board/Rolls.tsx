@@ -6,6 +6,7 @@ import { useStore } from '../../Core/Store';
 import Portrait from './Portrait';
 import Juice from '../../Core/Juice';
 import Dice from '../../Assets/Dice';
+import Dice2 from './Dice';
 
 function Rolls() {
   const {
@@ -19,7 +20,9 @@ function Rolls() {
       <Typography>{level}</Typography>
       <Stack direction="row" textAlign="center" justifyContent="center">
         <Box sx={{ justifyItems: 'center' }}>
-          <Portrait img={Dice[themeLeft].img} text={`${rollLeft ?? ''}`} refe={Juice.rollLeft} />
+          <Portrait img={Dice[themeLeft].bg} refe={Juice.rollLeft}>
+            <Dice2 num={rollLeft} img={Dice[themeLeft].img} />
+          </Portrait>
           <Chip
             label={`${themeLeft} 6`}
             size="small"
@@ -35,13 +38,18 @@ function Rolls() {
           <Typography
             variant="h2"
             fontFamily="PT Serif"
-            sx={{ height: '192px', alignContent: 'center' }}
+            sx={{
+              height: '192px',
+              alignContent: 'center',
+            }}
           >
             {sign}
           </Typography>
         </Box>
         <Box sx={{ justifyItems: 'center' }}>
-          <Portrait img={Dice[themeRight].img} text={`${rollRight ?? ''}`} refe={Juice.rollRight} />
+          <Portrait img={Dice[themeRight].bg} refe={Juice.rollRight}>
+            <Dice2 num={rollRight} img={Dice[themeRight].img} />
+          </Portrait>
           <Chip
             label={`${themeRight} 6`}
             size="small"

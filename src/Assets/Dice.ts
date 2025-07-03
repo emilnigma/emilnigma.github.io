@@ -1,19 +1,23 @@
 const Dice = {
   Fire: {
-    img: 'assets/dice/Fire.jpg',
+    img: 'assets/dice/Fire2.jpg',
+    bg: 'assets/dice/FireBG.jpg',
     rgb: '#e73d09',
   },
   Frost: {
-    img: 'assets/dice/Frost.jpg',
+    img: 'assets/dice/Frost2.jpg',
+    bg: 'assets/dice/FrostBG.jpg',
     rgb: '#10749d',
   },
   Light: {
-    img: 'assets/dice/Light.jpg',
+    img: 'assets/dice/Light2.jpg',
+    bg: 'assets/dice/LightBG.jpg',
     rgb: '#6e5b43',
     blackText: true,
   },
   Shadow: {
     img: 'assets/dice/Shadow.jpg',
+    bg: 'assets/dice/Shadow.jpg',
     rgb: '#190f2b',
   },
 };

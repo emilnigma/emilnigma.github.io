@@ -11,7 +11,6 @@ const progressColor = mechanics.phase.rgb;
 
 function Progress() {
   const {
-    rollTheme,
     progress, progressMax,
     tooltip, tooltipSet,
   } = useStore();
@@ -47,7 +46,8 @@ function Progress() {
   return (
     <Box>
       <Stack direction="row">
-        <Typography variant="h5" flexGrow={1}>Progress</Typography>
+        <Typography variant="h5">Progress</Typography>
+        <Typography color={progressColor} flexGrow={1}>{`${progress}/${progressMax}`}</Typography>
         <IconButton onClick={() => tooltipSet(tooltip === 'progress' ? 'none' : 'progress')}>
           {tooltip === 'progress'
             ? <RemoveCircleOutlineOutlinedIcon htmlColor="white" />
@@ -55,14 +55,10 @@ function Progress() {
         </IconButton>
       </Stack>
       <Collapse in={tooltip === 'progress'}>
-        <ul style={{ margin: 1 }}>
-          <li>{`Current progress: ${progress}`}</li>
-          <li>{`Goal: ${progressMax}`}</li>
-        </ul>
         <Typography sx={{ mb: 1 }}>
-          To successfully brew a health potion you need to roll
-          <Typography color={progressColor} component="span">{` ${rollTheme[0]} ≥ ${rollTheme[1]} `}</Typography>
-          {`${progressMax} times. Once you have reached the goal you will be able to sell your potion.`}
+          When your left dice shows a number that is
+          <Typography color={progressColor} component="span">{' higher or equal '}</Typography>
+          to the left number your progress is advanced by 1. Once your progress bar is filled you are able to finish and sell your potion.
         </Typography>
       </Collapse>
       <Stack direction="row" sx={{ position: 'relative' }}>

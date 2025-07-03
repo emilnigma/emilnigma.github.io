@@ -3,7 +3,6 @@ import { action, makeObservable, observable } from 'mobx';
 import { createContext, createRef, useContext } from 'react';
 import { clamp, randomBetween } from './Random';
 import { Page } from '../Components/Main/Game';
-import { juice } from './Juice';
 import { DiceKey } from '../Assets/Dice';
 import Levels, { LevelKey } from '../Assets/Levels';
 
@@ -52,39 +51,27 @@ export default class Store {
 
   rollTheme: DiceKey[] = ['Fire', 'Frost'];
   rollValue: (number | undefined)[] = [undefined, undefined];
-  rollLeft: number | undefined = undefined;
+  rollLeft: number | undefined = 1;
   rollLeftMax = 6;
-  rollRight: number | undefined = undefined;
+  rollRight: number | undefined = 1;
   rollRightMax = 6;
-  rollSet = ([rollLeft, rollRight]: (number | undefined)[]) => {
+  rollSet = ([rollLeft, rollRight]: (number)[]) => {
     this.rollLeft = rollLeft;
     this.rollRight = rollRight;
+    if (this.rollLeft !== undefined && this.rollRight !== undefined && this.rollLeft >= this.rollRight) this.progressSet(this.progress + 1);
+    if (this.capacityIsVisible()) this.capacitySet(this.capacity + 1);
+    if (this.stabilityIsVisible()) this.stabilitySet(this.stability + (this.rollLeft ?? 0) - (this.rollRight ?? 0));
   };
   rollReset = () => {
     this.rollLeft = undefined;
     this.rollRight = undefined;
   };
   startAnim = () => {
-    this.rollReset();
-    let speed = -150;
-    let anim = 0;
-    const frame = () => {
-      anim = setTimeout(() => {
-        this.rollSet([randomBetween(1, 6), randomBetween(1, 6)]);
-        speed += 10;
-        frame();
-      }, Math.max(15, Math.abs(speed)));
-    };
-    frame();
     setTimeout(() => {
-      clearTimeout(anim);
-      juice('rollLeft', 'testJuice');
-      juice('rollRight', 'testJuice');
-      if (this.rollLeft !== undefined && this.rollRight !== undefined && this.rollLeft >= this.rollRight) this.progressSet(this.progress + 1);
-      if (this.capacityIsVisible()) this.capacitySet(this.capacity + 1);
-      if (this.stabilityIsVisible()) this.stabilitySet(this.stability + (this.rollLeft ?? 0) - (this.rollRight ?? 0));
+      this.rollSet([randomBetween(1, 6), randomBetween(1, 6)]);
+      console.log(this.rollLeft, this.rollRight);
       this.qualitySet();
-    }, 5000);
+    }, 500);
   };
 
   progress = 0;
