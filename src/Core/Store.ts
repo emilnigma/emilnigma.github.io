@@ -80,8 +80,7 @@ export default class Store {
       clearTimeout(anim);
       juice('rollLeft', 'testJuice');
       juice('rollRight', 'testJuice');
-      this.progressSet(this.progress + 1);
-      //      if (this.rollLeft !== undefined && this.rollRight !== undefined && this.rollLeft >= this.rollRight) this.progressSet(this.progress + 1);
+      if (this.rollLeft !== undefined && this.rollRight !== undefined && this.rollLeft >= this.rollRight) this.progressSet(this.progress + 1);
       if (this.capacityIsVisible()) this.capacitySet(this.capacity + 1);
       if (this.stabilityIsVisible()) this.stabilitySet(this.stability + (this.rollLeft ?? 0) - (this.rollRight ?? 0));
       this.qualitySet();
