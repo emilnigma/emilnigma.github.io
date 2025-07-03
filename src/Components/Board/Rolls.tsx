@@ -7,11 +7,6 @@ import Portrait from './Portrait';
 import Juice from '../../Core/Juice';
 import Dice from '../../Assets/Dice';
 
-const sx = {
-  borderRadius: '8px',
-  textAlign: 'center',
-};
-
 function Rolls() {
   const {
     level, rollTheme, rollLeft, rollRight,
@@ -22,8 +17,8 @@ function Rolls() {
   return (
     <>
       <Typography>{level}</Typography>
-      <Stack direction="row">
-        <Box flexGrow={1} sx={{ ...sx, width: '30%', justifyItems: 'center' }}>
+      <Stack direction="row" textAlign="center" justifyContent="center">
+        <Box sx={{ justifyItems: 'center' }}>
           <Portrait img={Dice[themeLeft].img} text={`${rollLeft ?? ''}`} refe={Juice.rollLeft} />
           <Chip
             label={`${themeLeft} 6`}
@@ -36,7 +31,7 @@ function Rolls() {
             }}
           />
         </Box>
-        <Box sx={{ ...sx, width: '45px' }}>
+        <Box sx={{ width: '45px' }}>
           <Typography
             variant="h2"
             fontFamily="PT Serif"
@@ -45,7 +40,7 @@ function Rolls() {
             {sign}
           </Typography>
         </Box>
-        <Box flexGrow={1} sx={{ ...sx, width: '30%', justifyItems: 'center' }}>
+        <Box sx={{ justifyItems: 'center' }}>
           <Portrait img={Dice[themeRight].img} text={`${rollRight ?? ''}`} refe={Juice.rollRight} />
           <Chip
             label={`${themeRight} 6`}

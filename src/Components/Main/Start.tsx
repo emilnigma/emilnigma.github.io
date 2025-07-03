@@ -1,5 +1,6 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
+import { useStore } from '../../Core/Store';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
 import players from '../../Assets/Players';
@@ -8,10 +9,7 @@ import TextIcon, {
   CurrencyIcon, EmeraldIcon, RubyIcon, SapphireIcon, ScoreIcon, TopazIcon,
 } from '../TextIcon';
 import Levels from '../../Assets/Levels';
-import { useStore } from '../../Core/Store';
 import Dice from '../../Assets/Dice';
-
-const maxWidth = '500px';
 
 function Start() {
   const { levelSet } = useStore();
@@ -36,10 +34,9 @@ function Start() {
   ];
   const assetCmps = allAssets.map((src) => <img width={30} src={src} alt="" key={src} />);
   return (
-    <Stack direction="column" spacing={1} sx={{ maxWidth, m: 1 }}>
-
+    <>
       <Typography
-        variant="h2"
+        variant="h3"
         textAlign="center"
         sx={{
           textShadow: '0px 3px 3px #0000008a',
@@ -112,7 +109,7 @@ function Start() {
         <Typography variant="h4">Preload Assets</Typography>
         {assetCmps}
       </div>
-    </Stack>
+    </>
   );
 };
 

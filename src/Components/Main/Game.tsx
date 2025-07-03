@@ -15,7 +15,13 @@ export type Page = keyof typeof pageMapping;
 function Game() {
   const { page } = useStore();
   return (
-    <Stack direction="column" spacing={1} sx={{ m: 1 }}>
+    <Stack
+      direction="column"
+      spacing={1}
+      sx={{
+        m: 1, display: 'grid', justifySelf: 'center', maxWidth: '500px',
+      }}
+    >
       { pageMapping[page] }
     </Stack>
   );

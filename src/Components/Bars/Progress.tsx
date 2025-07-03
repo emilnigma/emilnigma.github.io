@@ -65,8 +65,19 @@ function Progress() {
           {`${progressMax} times. Once you have reached the goal you will be able to sell your potion.`}
         </Typography>
       </Collapse>
-      <Stack direction="row">
+      <Stack direction="row" sx={{ position: 'relative' }}>
         {...indicators}
+        <span style={{
+          width: '15px',
+          height: '15px',
+          position: 'absolute',
+          left: `min(max(8px, calc(${(progress * 100) / progressMax}% - 8px)), calc(100% - 8px))`,
+          backgroundColor: 'white',
+          transform: 'translate(-50%, 0%)',
+          borderRadius: '8px',
+          transition: 'left 1s',
+        }}
+        />
       </Stack>
     </Box>
   );

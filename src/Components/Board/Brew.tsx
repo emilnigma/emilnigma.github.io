@@ -20,28 +20,28 @@ function Brew() {
     stability, stabilityLeftBound, stabilityRightBound, stabilityIsVisible,
     quality,
   } = useStore();
-  const [introducedProgress, setIntroducedProgress] = useState(false);
-  const [introducedCapacity, setIntroducedCapacity] = useState(false);
-  const [introducedStability, setIntroducedStability] = useState(false);
+  const isTutorial = level === Object.keys(Levels)[0];
+  const [introducedProgress, setIntroducedProgress] = useState(!isTutorial);
+  const [introducedCapacity, setIntroducedCapacity] = useState(!isTutorial);
+  const [introducedStability, setIntroducedStability] = useState(!isTutorial);
 
   const isFull = capacity >= capacityMax;
   const isStable = stability <= stabilityLeftBound && stability >= stabilityRightBound;
-  const isTutorial = level === Object.keys(Levels)[0];
 
   const [gold, silver, copper] = quality;
   const qualityString = `${gold > 0 ? `${gold} G ` : ''}${gold > 0 || silver > 0 ? `${silver} S ` : ''}${`${copper} C`}`;
 
-  if (isTutorial && !introducedProgress) {
+  if (!introducedProgress) {
     tooltipSet('progress');
     setIntroducedProgress(true);
   }
 
-  if (capacityIsVisible() && !introducedCapacity) {
+  if (introducedProgress && capacityIsVisible() && !introducedCapacity) {
     tooltipSet('capacity');
     setIntroducedCapacity(true);
   }
 
-  if (stabilityIsVisible() && !introducedStability) {
+  if (introducedCapacity && stabilityIsVisible() && !introducedStability) {
     tooltipSet('stability');
     setIntroducedStability(true);
   }
