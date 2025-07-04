@@ -1,6 +1,14 @@
+html,
+body {
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
 #root {
   display: flex;
   justify-content: center;
+  /* width: 100%; */
 }
 
 @keyframes bounce {
@@ -60,6 +68,7 @@
 .side:nth-child(6) {
   transform: rotateY(-180deg) translateZ(49px);
 }
+
 /*
 .show-undefined {
   transform: rotateX(calc(-720deg - 6deg)) rotateY(calc(0deg - 15deg)) rotateZ(calc(-720deg));
