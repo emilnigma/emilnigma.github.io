@@ -19,7 +19,7 @@ function Game() {
       direction="column"
       spacing={1}
       sx={{
-        m: 1, display: 'grid', justifySelf: 'center', maxWidth: '500px',
+        m: 1, display: 'grid', justifySelf: 'center', width: 'min(100%, 500px)',
       }}
     >
       { pageMapping[page] }

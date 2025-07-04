@@ -21,7 +21,7 @@ function Portrait({
         backgroundPosition: 'center',
         backgroundImage: `url("${img}")`,
         backgroundSize: 'cover',
-        maskImage: 'radial-gradient(circle at 50%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0.1) 66%, rgba(0, 0, 0, 0) 66%',
+        maskImage: 'radial-gradient(circle at 50%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 66%',
         borderWidth: '2px',
         borderStyle: 'solid',
         borderImage: 'linear-gradient(to bottom, transparent, #333, transparent) 1 0 1 0',
