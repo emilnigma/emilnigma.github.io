@@ -53,8 +53,6 @@ function Brew() {
       {isTutorial ? <Collapse in={capacityIsVisible()}><Capacity /></Collapse> : <Capacity />}
       {isTutorial ? <Collapse in={stabilityIsVisible()}><Stability /></Collapse> : <Stability />}
 
-      <br />
-
       <Button variant="outlined" onClick={() => pageSet('ingredients')} disabled={!isStable || isFull}>
         Add Ingredient
       </Button>

@@ -16,12 +16,12 @@ function Rolls() {
     <>
       <Typography>{level}</Typography>
       <Grid container textAlign="center" justifyContent="center">
-        <Grid item xs={6} display="grid" justifyContent="center" sx={{ zIndex: 9 }}>
+        <Grid item xs={6} display="grid" justifyContent="center" sx={{ zIndex: 9, overflow: 'hidden' }}>
           <Portrait img={Dice[themeLeft].bg} refe={Juice.rollLeft}>
             <Dice2 num={rollLeft} img={Dice[themeLeft].img} />
           </Portrait>
         </Grid>
-        <Grid item xs={6} display="grid" justifyContent="center">
+        <Grid item xs={6} display="grid" justifyContent="center" sx={{ zIndex: 8, overflow: 'hidden' }}>
           <Portrait img={Dice[themeRight].bg} refe={Juice.rollRight}>
             <Dice2 num={rollRight} img={Dice[themeRight].img} />
           </Portrait>
