@@ -1,33 +1,34 @@
+import Store from '../Core/Store';
+
 type IngredientAsset = Record<string, {
   img: string
   description: string
   instantEffect?: () => void
-  condition?: () => boolean
-  afterPickEffect?: () => void
 }>;
 
 const ingredients: IngredientAsset = {
+  'Inert Potato': {
+    img: 'assets/ingredients/carrot.jpg',
+    description: 'Carrots are not magic. Together with Mushrooms, however, they can quickly help to brew valuable potions.',
+  },
   'Fire Lily': {
     img: 'assets/ingredients/fire_lily.jpg',
     description: 'Fire Lilies are volatile and highly flamable. Safely handling them earns you Gold, but using over seven will blow up your cauldron.',
     instantEffect: () => {
-      // const { player } = effectBase();
-      // player.changeCurrency({ gold: 1 });
+      const {
+        progress, progressSet,
+        capacity, capacitySet,
+      } = Store.getInstance();
+      progressSet(progress + 1);
+      capacitySet(capacity + 3);
     },
-  },
-  'Humble Carrot': {
-    img: 'assets/ingredients/carrot.jpg',
-    description: 'Carrots are not magic. Together with Mushrooms, however, they can quickly help to brew valuable potions.',
   },
   'Blue Trumpet Mushroom': {
     img: 'assets/ingredients/blue_trumpet_mushrooms.jpg',
     description: 'Mushrooms move an extra spot if there is a carrot in your cauldron. Two spots if there is three or more carrots.',
     instantEffect: () => {
-      // const { player } = effectBase();
-      // const carrots = player.chipsOnBoard.filter((c) => (c.chip.kind === 'Humble Carrot')).reduce((sum) => sum + 1, 0);
-      // const [mushroom] = player.getHighestChipOnBoard();
-      // if (carrots > 2) { mushroom.position += 2; return; }
-      // if (carrots > 0) { mushroom.position += 1; }
+      const { stability, stabilitySet } = Store.getInstance();
+      stabilitySet(stability + 2);
     },
   },
   'Clover Leaf': {
@@ -39,12 +40,6 @@ const ingredients: IngredientAsset = {
     //   // return highestChips[0].chip.kind === 'Clover Leaf'
     //   //  || (highestChips.length > 1 && highestChips[1].chip.kind === 'Clover Leaf');
     // },
-    afterPickEffect: () => {
-      // const { player } = effectBase();
-      // const highestChips = player.getHighestChipOnBoard();
-      // if (highestChips[0].chip.kind === 'Clover Leaf') player.changeCurrency({ emerald: 1 });
-      // if (highestChips.length > 1 && highestChips[1].chip.kind === 'Clover Leaf') player.changeCurrency({ emerald: 1 });
-    },
   },
   'Sliverlake Seaweed': {
     img: 'assets/ingredients/sliverlake_seaweed.jpg',

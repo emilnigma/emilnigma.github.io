@@ -76,28 +76,34 @@ export default class Store {
 
   progress = 0;
   progressMax = 4;
+  progressLastChange = undefined;
   progressSet = (progress: number) => {
     this.progress = clamp(progress, 0, this.progressMax);
   };
+  progressIsDone = () => this.progress === this.progressMax;
 
   capacity = 0;
   capacityMax = 9;
+  capacityLastChange = undefined;
   capacityIsVisible = () => this.level !== tutorialLevel || this.progress > 0;
   capacitySet = (capacity: number) => {
     if (!this.capacityIsVisible()) return;
-    this.capacity = clamp(capacity, 0, this.capacityMax);
+    this.capacity = Math.max(0, capacity);
   };
+  capacityIsFail = () => this.capacity >= this.capacityMax && !this.progressIsDone();
 
   stability = 0;
   stabilityRightBound = -8;
   stabilityLeftBound = 8;
   stabilityRightMax = -10;
   stabilityLeftMax = 10;
+  stabilityLastChange = undefined;
   stabilityIsVisible = () => this.level !== tutorialLevel || this.progress > 1;
   stabilitySet = (stability: number) => {
     if (!this.stabilityIsVisible()) return;
     this.stability = clamp(stability, this.stabilityRightMax, this.stabilityLeftMax);
   };
+  stabilityIsFail = () => this.stability > this.stabilityLeftBound && this.stability < this.stabilityRightBound;
 
   quality = [0, 0, 0];
   qualitySet = () => {

@@ -8,16 +8,15 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 
-const stabilityColor = mechanics.phase.rgb;
-const stabilityColorBg = `${stabilityColor}43`;
-
 function Stability() {
   const {
-    stability,
+    stability, stabilityIsFail,
     stabilityRightBound, stabilityRightMax,
     stabilityLeftBound, stabilityLeftMax,
     tooltip, tooltipSet,
   } = useStore();
+  const stabilityColor = stabilityIsFail() ? '#b92c29' : mechanics.phase.rgb;
+  const stabilityColorBg = `${stabilityColor}43`;
 
   const stabilityRightBoundPercentage = (100 * (stabilityRightBound - stabilityLeftMax)) / (stabilityRightMax - stabilityLeftMax);
   const stabilityLeftBoundPercentage = (100 * (stabilityLeftBound - stabilityLeftMax)) / (stabilityRightMax - stabilityLeftMax);

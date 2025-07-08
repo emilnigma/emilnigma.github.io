@@ -7,13 +7,39 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 
-const capacityColor = mechanics.phase.rgb;
-
 function Capacity() {
   const {
-    capacity, capacityMax,
+    capacity, capacityMax, capacityIsFail,
     tooltip, tooltipSet,
   } = useStore();
+  const capacityColor = capacityIsFail() ? '#b92c29' : mechanics.phase.rgb;
+  const indicators = [...Array(capacityMax).keys()].map((i) => {
+    const isActive = i < capacity;
+    return (
+      <span style={{
+        width: `${100 / capacityMax}%`,
+        height: '15px',
+        backgroundColor: '#333',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'block',
+        borderRadius: '8px',
+      }}
+      >
+        <span style={{
+          width: isActive ? '100%' : '0%',
+          height: '15px',
+          backgroundColor: capacityColor,
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'block',
+          borderRadius: '8px',
+          transition: 'width 1s',
+        }}
+        />
+      </span>
+    );
+  });
   return (
     <Box>
       <Stack direction="row">
@@ -35,7 +61,21 @@ function Capacity() {
           you need to sell your potion or start over. Naturally, a larger volume is of greater value.
         </Typography>
       </Collapse>
-      <span style={{
+      <Stack direction="row" sx={{ position: 'relative' }}>
+        {indicators}
+        <span style={{
+          width: '15px',
+          height: '15px',
+          position: 'absolute',
+          left: `min(max(8px, calc(${(capacity * 100) / capacityMax}% - 8px)), calc(100% - 8px))`,
+          backgroundColor: 'white',
+          transform: 'translate(-50%, 0%)',
+          borderRadius: '8px',
+          transition: 'left 1s',
+        }}
+        />
+      </Stack>
+      {/* <span style={{
         width: '100%',
         height: '15px',
         backgroundColor: '#333',
@@ -72,7 +112,7 @@ function Capacity() {
           transition: 'left 1s',
         }}
         />
-      </span>
+      </span> */}
     </Box>
   );
 }
