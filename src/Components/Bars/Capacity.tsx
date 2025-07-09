@@ -6,6 +6,7 @@ import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOut
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
+import { glass } from './Progress';
 
 function Capacity() {
   const {
@@ -24,6 +25,7 @@ function Capacity() {
         overflow: 'hidden',
         display: 'block',
         borderRadius: '8px',
+        backgroundImage: glass,
       }}
       >
         <span style={{
@@ -35,6 +37,7 @@ function Capacity() {
           display: 'block',
           borderRadius: '8px',
           transition: 'width 1s',
+          backgroundImage: glass,
         }}
         />
       </span>

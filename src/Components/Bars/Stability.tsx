@@ -7,6 +7,7 @@ import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
+import { glass } from './Progress';
 
 function Stability() {
   const {
@@ -16,7 +17,6 @@ function Stability() {
     tooltip, tooltipSet,
   } = useStore();
   const stabilityColor = stabilityIsFail() ? '#b92c29' : mechanics.phase.rgb;
-  const stabilityColorBg = `${stabilityColor}43`;
 
   const stabilityRightBoundPercentage = (100 * (stabilityRightBound - stabilityLeftMax)) / (stabilityRightMax - stabilityLeftMax);
   const stabilityLeftBoundPercentage = (100 * (stabilityLeftBound - stabilityLeftMax)) / (stabilityRightMax - stabilityLeftMax);
@@ -53,6 +53,7 @@ function Stability() {
         overflow: 'hidden',
         display: 'block',
         borderRadius: '8px',
+        backgroundImage: glass,
       }}
       >
         <span style={{
@@ -60,7 +61,7 @@ function Stability() {
           height: '15px',
           display: 'inline-block',
           textAlign: 'right',
-          backgroundColor: stabilityColorBg,
+          backgroundImage: glass,
         }}
         >
           <LocalFireDepartmentIcon htmlColor="orange" sx={{ height: '17px', translate: '12.3px -1.3px' }} />
@@ -73,6 +74,7 @@ function Stability() {
           backgroundColor: stabilityColor,
           position: 'absolute',
           transition: 'width 1s',
+          backgroundImage: glass,
         }}
         />
         <span style={{
@@ -83,6 +85,7 @@ function Stability() {
           backgroundColor: stabilityColor,
           position: 'absolute',
           transition: 'width 1s',
+          backgroundImage: glass,
         }}
         />
         <span style={{
@@ -92,7 +95,7 @@ function Stability() {
           left: `${stabilityRightBoundPercentage}%`,
           display: 'inline-block',
           textAlign: 'left',
-          backgroundColor: stabilityColorBg,
+          backgroundImage: glass,
         }}
         >
           <LocalFireDepartmentIcon htmlColor="orange" sx={{ height: '17px', translate: '-12.3px -1.3px' }} />
@@ -106,6 +109,7 @@ function Stability() {
           transform: 'translate(-50%, 0%)',
           borderRadius: '8px',
           transition: 'left 1s',
+          backgroundImage: glass,
         }}
         />
       </span>

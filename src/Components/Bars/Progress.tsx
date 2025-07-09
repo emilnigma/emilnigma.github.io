@@ -7,6 +7,7 @@ import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOut
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 
+export const glass = 'linear-gradient(to bottom, transparent 0%, transparent 5%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(255,255,255,0.03))';
 const progressColor = mechanics.phase.rgb;
 
 function Progress() {
@@ -26,6 +27,7 @@ function Progress() {
         overflow: 'hidden',
         display: 'block',
         borderRadius: '8px',
+        backgroundImage: glass,
       }}
       >
         <span style={{
@@ -37,6 +39,7 @@ function Progress() {
           display: 'block',
           borderRadius: '8px',
           transition: 'width 1s',
+          backgroundImage: glass,
         }}
         />
       </span>
