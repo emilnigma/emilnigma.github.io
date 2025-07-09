@@ -24,112 +24,74 @@ body {
 
 .dice {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
-  transition: transform 0.5s;
+  transition: transform 1.5s;
   background-image: radial-gradient(0% white, 150%black);
 }
 
 .side {
   position: absolute;
   background-size: contain;
-  width: 100px;
-  height: 100px;
+  width: 64px;
+  height: 64px;
   text-align: center;
   color: white;
   align-content: center;
-  font-size: 4rem;
+  font-size: 3rem;
+  line-height: 32px;
   font-family: 'PT Serif';
-  text-shadow: 0px 3px 3px #0000008a
+  text-shadow: 0px 3px 3px #0000008a;
+  border: 1px solid #ffffff22;
+  border-radius: 3px;
 }
-
 .side:nth-child(1) {
-  transform: translateZ(49px);
+  transform: translateZ(32px);
 }
-
 .side:nth-child(2) {
-  transform: rotateX(-90deg) translateZ(49px);
+  transform: rotateX(-90deg) translateZ(32px);
 }
-
 .side:nth-child(3) {
-  transform: rotateY(90deg) translateZ(49px);
+  transform: rotateY(90deg) translateZ(32px);
 }
-
 .side:nth-child(4) {
-  transform: rotateY(-90deg) translateZ(49px);
+  transform: rotateY(-90deg) translateZ(32px);
 }
-
 .side:nth-child(5) {
-  transform: rotateX(90deg) translateZ(49px);
+  transform: rotateX(90deg) translateZ(32px);
 }
-
-
 .side:nth-child(6) {
-  transform: rotateY(-180deg) translateZ(49px);
+  transform: rotateY(-180deg) translateZ(32px);
 }
 
-/*
-.show-undefined {
-  transform: rotateX(calc(-720deg - 6deg)) rotateY(calc(0deg - 15deg)) rotateZ(calc(-720deg));
-  transition: 1s ease-in;
+@keyframes idle {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
 }
-
-.show-1 {
-  transform: rotateX(calc(720deg - 6deg)) rotateY(calc(0deg - 15deg)) rotateZ(calc(-720deg));
-}
-
-.show-2 {
-  transform: rotateX(calc(450deg - 9deg)) rotateY(calc(0deg)) rotateZ(calc(-720deg + 10deg));
-}
-
-.show-3 {
-  transform: rotateX(calc(0deg - 12deg)) rotateY(calc(-450deg - 5deg)) rotateZ(calc(-1440deg));
-}
-
-.show-4 {
-  transform: rotateX(calc(0deg - 12deg)) rotateY(calc(810deg + 5deg)) rotateZ(calc(720deg));
-}
-
-.show-5 {
-  transform: rotateX(calc(-810deg - 9deg)) rotateY(calc(0deg)) rotateZ(calc(-1080deg + 10deg));
-}
-
-.show-6 {
-  transform: rotateX(calc(-900deg - 6deg)) rotateY(calc(0deg - 15deg)) rotateZ(calc(900deg));
-}
-*/
 
 .show-undefined {
-  /*
-  transform: rotateX(calc(-6deg)) rotateY(calc(-15deg)) rotateZ(0deg);
   transform: rotateX(calc(-1440deg - 6deg)) rotateY(calc(0deg - 15deg)) rotateZ(calc(0deg));
-  rotate: -1440deg 0 0;
-  transition: 3s ease-in;
-  */
 }
-
-
 .show-1 {
-  transform: rotateX(calc(-6deg)) rotateY(calc(-15deg)) rotateZ(0deg);
+  transform: rotateX(0) rotateY(0) rotateZ(0);
 }
-
-.show-2 {
-  transform: rotateX(calc(-360deg + 90deg - 6deg)) rotateY(0deg) rotateZ(10deg);
+.show-2 {  
+  transform: rotateX(90deg) rotateY(0) rotateZ(0);
 }
-
 .show-3 {
-  transform: rotateX(calc(-720deg - 6deg)) rotateY(calc(-90deg - 5deg)) rotateZ(0deg);
+  transform: rotateX(0) rotateY(-90deg) rotateZ(0);
 }
-
 .show-4 {
-  transform: rotateX(calc(-1080deg - 6deg)) rotateY(calc(90deg + 5deg)) rotateZ(0deg);
+  transform: rotateX(0) rotateY(90deg) rotateZ(0);
 }
-
 .show-5 {
-  transform: rotateX(calc(-1440deg - 90deg - 6deg)) rotateY(calc(0deg)) rotateZ(10deg);
+  transform: rotateX(-90deg) rotateY(0) rotateZ(0);
 }
-
 .show-6 {
-  transform: rotateX(calc(-1800deg - 180deg - 6deg)) rotateY(-15deg) rotateZ(180deg);
+  transform: rotateX(-180deg) rotateY(0) rotateZ(180deg);
 }

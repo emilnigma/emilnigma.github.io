@@ -4,10 +4,12 @@ import {
 import { useStore } from '../../Core/Store';
 import ingredients from '../../Assets/Ingredients';
 import mechanics from '../../Assets/Mechanics';
+import { shuffle } from '../../Core/Random';
 
 function Ingredients() {
   const { pageSet, startAnim } = useStore();
-  const ingredientCmps = Object.entries(ingredients).map(([key, value]) => {
+  const ingredientObjs = shuffle(Object.entries(ingredients)).slice(0, 3);
+  const ingredientCmps = ingredientObjs.map(([key, value]) => {
     const { img } = value;
     const add = () => {
       pageSet('brew');

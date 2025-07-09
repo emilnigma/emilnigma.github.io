@@ -33,14 +33,13 @@ export default class Store {
     }
     this.page = 'brew';
     this.level = level as LevelKey;
-    this.tooltip = level === tutorialLevel ? 'progress' : 'none';
     this.rollTheme = Levels[level as LevelKey].theme as DiceKey[];
     this.progress = 0;
     this.capacity = 0;
     this.stability = 0;
   };
 
-  tooltip = 'progress';
+  tooltip = 'none';
   tooltipSet = (tooltip: Tooltip) => {
     this.tooltip = tooltip;
   };
@@ -51,9 +50,9 @@ export default class Store {
 
   rollTheme: DiceKey[] = ['Fire', 'Frost'];
   rollValue: (number | undefined)[] = [undefined, undefined];
-  rollLeft: number | undefined = 1;
+  rollLeft: number | undefined = undefined;
   rollLeftMax = 6;
-  rollRight: number | undefined = 1;
+  rollRight: number | undefined = undefined;
   rollRightMax = 6;
   rollSet = ([rollLeft, rollRight]: (number)[]) => {
     this.rollLeft = rollLeft;
@@ -67,6 +66,7 @@ export default class Store {
     this.rollRight = undefined;
   };
   startAnim = () => {
+    this.rollReset();
     setTimeout(() => {
       this.rollSet([randomBetween(1, 6), randomBetween(1, 6)]);
       console.log(this.rollLeft, this.rollRight);

@@ -1,10 +1,10 @@
-import { Grid, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useStore } from '../../Core/Store';
 import Portrait from './Portrait';
-import Juice from '../../Core/Juice';
 import Dice from '../../Assets/Dice';
 import Dice2 from './Dice';
+import mechanics from '../../Assets/Mechanics';
 
 function Rolls() {
   const {
@@ -15,18 +15,18 @@ function Rolls() {
   return (
     <>
       <Typography>{level}</Typography>
-      <Grid container textAlign="center" justifyContent="center">
-        <Grid item xs={6} display="grid" justifyContent="center" sx={{ zIndex: 9, overflow: 'hidden' }}>
-          <Portrait img={Dice[themeLeft].bg} refe={Juice.rollLeft}>
-            <Dice2 num={rollLeft} img={Dice[themeLeft].img} />
-          </Portrait>
-        </Grid>
-        <Grid item xs={6} display="grid" justifyContent="center" sx={{ zIndex: 8, overflow: 'hidden' }}>
-          <Portrait img={Dice[themeRight].bg} refe={Juice.rollRight}>
-            <Dice2 num={rollRight} img={Dice[themeRight].img} />
-          </Portrait>
-        </Grid>
-      </Grid>
+      <div style={{ justifyItems: 'center', marginBottom: -100 }}>
+        <Portrait img={mechanics.phase.img} />
+      </div>
+      <Stack direction="row" sx={{ height: '100px' }}>
+        <Box sx={{ justifyItems: 'center', width: '100px', zIndex: 9 }}>
+          <Dice2 num={rollLeft} img={Dice[themeLeft].img} />
+        </Box>
+        <Box flexGrow={1} />
+        <Box sx={{ justifyItems: 'center', width: '100px', zIndex: 8 }}>
+          <Dice2 num={rollRight} img={Dice[themeRight].img} />
+        </Box>
+      </Stack>
     </>
   );
 }

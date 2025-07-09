@@ -17,16 +17,18 @@ function Capacity() {
   const indicators = [...Array(capacityMax).keys()].map((i) => {
     const isActive = i < capacity;
     return (
-      <span style={{
-        width: `${100 / capacityMax}%`,
-        height: '15px',
-        backgroundColor: '#333',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'block',
-        borderRadius: '8px',
-        backgroundImage: glass,
-      }}
+      <span
+        key={`capacity-indicator-${i}`}
+        style={{
+          width: `${100 / capacityMax}%`,
+          height: '15px',
+          backgroundColor: '#333',
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'block',
+          borderRadius: '8px',
+          backgroundImage: glass,
+        }}
       >
         <span style={{
           width: isActive ? '100%' : '0%',

@@ -14,7 +14,7 @@ const positions = [
 ];
 */
 
-function Dice({ num = 0, img }: DiceProps) {
+function Dice({ num, img }: DiceProps) {
   const style = { backgroundImage: `url(${img})` };
   return (
     <div className={`dice show-${num}`}>
