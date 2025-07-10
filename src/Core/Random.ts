@@ -6,3 +6,4 @@ export const shuffle = (unshuffled: any[]) => [...unshuffled]
   .sort((a, b) => a.sort - b.sort)
   .map(({ value }) => value);
 export const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
+export const range = (length: number) => Array.from(new Array(length), (_, i) => i);

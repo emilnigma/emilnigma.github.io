@@ -2,12 +2,12 @@ const Dice = {
   Fire: {
     img: 'assets/dice/Fire2.jpg',
     bg: 'assets/dice/FireBG.jpg',
-    rgb: '#e73d09',
+    rgb: '#f75d19',
   },
   Frost: {
     img: 'assets/dice/Frost2.jpg',
     bg: 'assets/dice/FrostBG.jpg',
-    rgb: '#10749d',
+    rgb: '#3094bd',
   },
   Light: {
     img: 'assets/dice/Light2.jpg',

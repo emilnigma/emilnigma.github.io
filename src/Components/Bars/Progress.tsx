@@ -6,6 +6,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
+import { range } from '../../Core/Random';
 
 export const glass = 'linear-gradient(to bottom, transparent 0%, transparent 5%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(255,255,255,0.03))';
 const progressColor = mechanics.phase.rgb;
@@ -16,7 +17,7 @@ function Progress() {
     tooltip, tooltipSet,
   } = useStore();
 
-  const indicators = [...Array(progressMax).keys()].map((i) => {
+  const indicators = range(progressMax).map((i) => {
     const isActive = i < progress;
     return (
       <span style={{
@@ -50,7 +51,6 @@ function Progress() {
     <Box>
       <Stack direction="row">
         <Typography variant="h5">Progress</Typography>
-        <Typography color={progressColor} flexGrow={1}>{`${progress}/${progressMax}`}</Typography>
         <IconButton onClick={() => tooltipSet(tooltip === 'progress' ? 'none' : 'progress')}>
           {tooltip === 'progress'
             ? <RemoveCircleOutlineOutlinedIcon htmlColor="white" />

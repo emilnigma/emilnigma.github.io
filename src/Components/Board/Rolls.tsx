@@ -20,11 +20,11 @@ function Rolls() {
       </div>
       <Stack direction="row" sx={{ height: '100px' }}>
         <Box sx={{ justifyItems: 'center', width: '100px', zIndex: 9 }}>
-          <Dice2 num={rollLeft} img={Dice[themeLeft].img} />
+          <Dice2 num={rollLeft} theme={Dice[themeLeft]} />
         </Box>
         <Box flexGrow={1} />
         <Box sx={{ justifyItems: 'center', width: '100px', zIndex: 8 }}>
-          <Dice2 num={rollRight} img={Dice[themeRight].img} />
+          <Dice2 num={rollRight} theme={Dice[themeRight]} />
         </Box>
       </Stack>
     </>

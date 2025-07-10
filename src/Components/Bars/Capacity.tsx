@@ -7,6 +7,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useStore } from '../../Core/Store';
 import mechanics from '../../Assets/Mechanics';
 import { glass } from './Progress';
+import { range } from '../../Core/Random';
 
 function Capacity() {
   const {
@@ -14,7 +15,7 @@ function Capacity() {
     tooltip, tooltipSet,
   } = useStore();
   const capacityColor = capacityIsFail() ? '#b92c29' : mechanics.phase.rgb;
-  const indicators = [...Array(capacityMax).keys()].map((i) => {
+  const indicators = range(capacityMax).map((i) => {
     const isActive = i < capacity;
     return (
       <span

@@ -1,5 +1,7 @@
+import { range } from '../Core/Random';
+
 // all positions
-export const boardPositions = Array.from(new Array(12), (_, i) => i);
+export const boardPositions = range(12);
 
 // score
 export const scorePointIncrements = [
